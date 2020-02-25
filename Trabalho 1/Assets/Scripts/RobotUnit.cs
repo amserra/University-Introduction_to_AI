@@ -28,7 +28,7 @@ public class RobotUnit : MonoBehaviour {
     public BlockDetectorScript blockDetector; // Para ser usado pelo BlockDectorScript
     private List<Tuple<float, float>> listAngleStr;
     public bool debugMode = true;
-    protected int maxObjects = 0;
+    public int maxObjects = 0;
 
     /*GameObjects are the fundamental objects in Unity that represent characters, props and scenery. 
     They do not accomplish much in themselves but they act as containers for Components,

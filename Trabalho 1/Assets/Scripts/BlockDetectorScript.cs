@@ -11,7 +11,7 @@ public class BlockDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
-    public float angleToClosestObj;
+    public float angleToClosestObstacle;
     public int numObjects;
     public bool debugMode;
     // Start is called before the first frame update
@@ -23,15 +23,27 @@ public class BlockDetectorScript : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         // YOUR CODE HERE
-        Debug.Log("hello there");
+        ObjectInfo obstacle;
+        obstacle = GetClosestObstacle();
+        RobotUnit agent = GameObject.FindObjectsOfType<RobotUnit>()[0];
+        if(agent.resourcesGathered < agent.maxObjects) {
+            if (obstacle != null) {
+                angleToClosestObstacle = obstacle.angle + 90; // Direcao perpendicular ao obstaculo?
+                // Formula no enunciado
+                strength = 1.0f / (obstacle.distance + 1.0f);
+            }
+        } else {
+            strength = 0;
+            angleToClosestObstacle = 0;
+        }
     }
 
     public float GetAngleToClosestObstacle() {
-        return angleToClosestObj;
+        return angleToClosestObstacle;
     }
 
     public float GetLinearOuput() {
-        return strength;
+        return strength * 0.1f; // Forca menor
     }
 
     public virtual float GetGaussianOutput() {
@@ -42,5 +54,50 @@ public class BlockDetectorScript : MonoBehaviour {
     public virtual float GetLogaritmicOutput() {
         // YOUR CODE HERE
         throw new NotImplementedException();
+    }
+
+    public List<ObjectInfo> GetVisibleObjects(string objectTag) {
+        RaycastHit hit;
+        List<ObjectInfo> objectsInformation = new List<ObjectInfo>();
+
+        // Se angleOfSensors = 10, entao tem 360/10=36 sensores em torno de si
+        for (int i = 0; i * angleOfSensors <= 360f; i++) {
+            // Physics.Raycast retorna True se o ray inteseta com um collider
+            //Raycast(Vector3 origin, Vector3 direction, float maxDistance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal);
+            // Quaternion.AngleAxis: Creates a rotation which rotates angle degrees around axis. Neste caso a volta do eixo y (vertical)
+            // Out faz passar por referencia: hit passa a ter a informacao do objeto atingido pelo Raycast
+            if (Physics.Raycast(this.transform.position, Quaternion.AngleAxis(-angleOfSensors * i, initialTransformUp) * initialTransformFwd, out hit, rangeOfSensors)) {
+                if (hit.transform.gameObject.CompareTag(objectTag)) {
+                    if (debugMode) {
+                        Debug.DrawRay(this.transform.position, Quaternion.AngleAxis((-angleOfSensors * i), initialTransformUp) * initialTransformFwd * hit.distance, Color.red);
+                    }
+                    ObjectInfo info = new ObjectInfo(hit.distance, angleOfSensors * i + 90);
+                    objectsInformation.Add(info);
+                }
+            }
+        }
+        // Sort baseado no metodo compareTo em ObjectInfo. Em primeiro os mais longe e em ultimo os mais perto
+        objectsInformation.Sort();
+
+        return objectsInformation;
+    }
+
+    public ObjectInfo[] GetVisibleObstacles() {
+        return (ObjectInfo[]) GetVisibleObjects("Wall").ToArray();
+    }
+
+    // 
+    public ObjectInfo GetClosestObstacle() {
+        ObjectInfo [] a = (ObjectInfo[])GetVisibleObjects("Wall").ToArray();
+        if(a.Length == 0) {
+            return null;
+        }
+        // Como a lista esta sorted o ultimo elemento e o mais perto
+        return a[a.Length-1];
+    }
+
+    // Returns a rotation that rotates z degrees around the z axis, x degrees around the x axis, and y degrees around the y axis; applied in that order.
+    private void LateUpdate() {
+        this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, this.transform.parent.rotation.z * -1.0f);
     }
 }

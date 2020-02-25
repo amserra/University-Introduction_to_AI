@@ -4,7 +4,8 @@ using UnityEngine;
 
 // Extende a classe RobotUnit
 public class LinearRobotUnitBehaviour : RobotUnit {
-    public float weightResource;
+    // Estes parametros sao definidos no editor do Unity. Pode ser vista a sua variacao em runtime no editor
+    public float weightResource; // Peso do nosso agente. Quanto menor mais rapido andara (mais leve sera)
     public float resourceValue;
     public float resouceAngle;
     public float blockValue;
@@ -16,14 +17,14 @@ public class LinearRobotUnitBehaviour : RobotUnit {
 
         resourceValue = weightResource * resourcesDetector.GetLinearOuput();
 
-        // blockAngle = blockDetector.GetAngleToClosestObstacle();
+        blockAngle = blockDetector.GetAngleToClosestObstacle();
 
-        // blockValue = weightResource * blockDetector.GetLinearOuput();
+        blockValue = weightResource * blockDetector.GetLinearOuput();
 
         // apply to the ball
         applyForce(resouceAngle, resourceValue); // go towards
 
-        //applyForce(blockAngle, blockValue); // go towards
+        applyForce(blockAngle, blockValue); // go towards
 
 
 

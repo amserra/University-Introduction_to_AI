@@ -33,7 +33,6 @@ public class ResourceDetectorScript : MonoBehaviour {
             strength = 0;
             angle = 0;
         }
-        
     }
 
     public float GetAngleToClosestResource() {
@@ -94,7 +93,7 @@ public class ResourceDetectorScript : MonoBehaviour {
         return a[a.Length-1];
     }
 
-
+    // Returns a rotation that rotates z degrees around the z axis, x degrees around the x axis, and y degrees around the y axis; applied in that order.
     private void LateUpdate() {
         this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, this.transform.parent.rotation.z * -1.0f);
     }
