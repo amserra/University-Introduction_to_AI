@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockDetectorScript : MonoBehaviour
-{
+// Criar sensor de proximidade aos blocos
+public class BlockDetectorScript : MonoBehaviour {
 
     public float angleOfSensors = 10f;
     public float rangeOfSensors = 10f;
@@ -15,38 +15,31 @@ public class BlockDetectorScript : MonoBehaviour
     public int numObjects;
     public bool debugMode;
     // Start is called before the first frame update
-    void Start()
-    {
-
+    void Start() {
         initialTransformUp = this.transform.up;
         initialTransformFwd = this.transform.forward;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         // YOUR CODE HERE
-
+        Debug.Log("hello there");
     }
 
-    public float GetAngleToClosestObstacle()
-    {
+    public float GetAngleToClosestObstacle() {
         return angleToClosestObj;
     }
 
-    public float GetLinearOuput()
-    {
+    public float GetLinearOuput() {
         return strength;
     }
 
-    public virtual float GetGaussianOutput()
-    {
+    public virtual float GetGaussianOutput() {
         // YOUR CODE HERE
         throw new NotImplementedException();
     }
 
-    public virtual float GetLogaritmicOutput()
-    {
+    public virtual float GetLogaritmicOutput() {
         // YOUR CODE HERE
         throw new NotImplementedException();
     }
