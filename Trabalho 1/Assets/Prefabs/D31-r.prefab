@@ -221,7 +221,7 @@ MonoBehaviour:
   angleOfSensors: 5
   rangeOfSensors: 30
   strength: 0
-  angleToClosestObj: 0
+  angleToClosestObstacle: 0
   numObjects: 0
   debugMode: 0
 --- !u!1 &3965723576953268335
@@ -353,8 +353,9 @@ MonoBehaviour:
   startTime: 0
   timeElapsed: 0
   resourcesDetector: {fileID: 7314612682239532039}
-  blockDetector: {fileID: 0}
+  blockDetector: {fileID: 5742317949312453327}
   debugMode: 1
+  maxObjects: 0
   weightResource: 1
   resourceValue: 0
   resouceAngle: 0
