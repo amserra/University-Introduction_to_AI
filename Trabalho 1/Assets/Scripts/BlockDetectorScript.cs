@@ -28,7 +28,7 @@ public class BlockDetectorScript : MonoBehaviour {
         RobotUnit agent = GameObject.FindObjectsOfType<RobotUnit>()[0];
         if(agent.resourcesGathered < agent.maxObjects) {
             if (obstacle != null) {
-                angleToClosestObstacle = obstacle.angle + 90; // Direcao perpendicular ao obstaculo?
+                angleToClosestObstacle = obstacle.angle + 180; // Direcao perpendicular ao obstaculo?
                 // Formula no enunciado
                 strength = 1.0f / (obstacle.distance + 1.0f);
             }
@@ -43,7 +43,7 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength * 0.1f; // Forca menor
+        return strength * 0.5f; // Forca menor
     }
 
     public virtual float GetGaussianOutput() {
