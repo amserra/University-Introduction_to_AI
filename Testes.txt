@@ -1,0 +1,10 @@
+Teste Linear Mapa 1:
+
+Angulo de 90º, e strength * 0.1:
+O robo bate constatemente nas paredes.
+
+Angulo de 180º, e strength * 0.1:
+O robo já consegue evitar as paredes quando apanha as primeiras 2 caixas
+
+Angulo de 180º, e strength * 0.5:
+O robo só bate na parede depois de apanhar a última caixa

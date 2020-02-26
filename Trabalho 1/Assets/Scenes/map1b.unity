@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465797, g: 0.4964139, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657993, g: 0.49641424, b: 0.5748182, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1280,6 +1280,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1338230199}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1107682260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
+    type: 3}
+  m_PrefabInstance: {fileID: 1669599652}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0a6ac58e2ef4bb184d9c065cbf536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1120493373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,7 +1673,7 @@ PrefabInstance:
         type: 3}
       propertyPath: blockDetector
       value: 
-      objectReference: {fileID: 1629000158}
+      objectReference: {fileID: 1107682260}
     - target: {fileID: 4098859518129120615, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: m_LocalPosition.x
