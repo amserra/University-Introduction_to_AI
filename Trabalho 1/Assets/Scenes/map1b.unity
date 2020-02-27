@@ -1639,18 +1639,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5229371597809290880}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1629000158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
-    type: 3}
-  m_PrefabInstance: {fileID: 1669599652}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0a6ac58e2ef4bb184d9c065cbf536b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1654326368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8579131249557736061, guid: a178fece808d444b1b26355fde5accad,
@@ -1742,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: rangeOfSensors
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8831919988329666845, guid: b606527f8af28664a894844f3f526637,
         type: 3}
