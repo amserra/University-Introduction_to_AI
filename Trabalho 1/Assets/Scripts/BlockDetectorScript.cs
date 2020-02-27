@@ -30,7 +30,7 @@ public class BlockDetectorScript : MonoBehaviour {
         obstacle = GetClosestObstacle();
         if(agent.resourcesGathered < agent.maxObjects) {
             if (obstacle != null) {
-                angleToClosestObstacle = obstacle.angle + 180; // Direcao perpendicular ao obstaculo?
+                angleToClosestObstacle = obstacle.angle + 135; // Direcao perpendicular ao obstaculo?
                 // Formula no enunciado
                 strength = 1.0f / (obstacle.distance + 1.0f);
             }
@@ -45,7 +45,7 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength * 0.5f; // Forca menor
+        return strength * 0.1f; // Forca menor
     }
 
     public virtual float GetGaussianOutput() {
@@ -71,7 +71,7 @@ public class BlockDetectorScript : MonoBehaviour {
             if (Physics.Raycast(this.transform.position, Quaternion.AngleAxis(-angleOfSensors * i, initialTransformUp) * initialTransformFwd, out hit, rangeOfSensors)) {
                 if (hit.transform.gameObject.CompareTag(objectTag)) {
                     if (debugMode) {
-                        Debug.DrawRay(this.transform.position, Quaternion.AngleAxis((-angleOfSensors * i), initialTransformUp) * initialTransformFwd * hit.distance, Color.red);
+                        Debug.DrawRay(this.transform.position, Quaternion.AngleAxis((-angleOfSensors * i), initialTransformUp) * initialTransformFwd * hit.distance, Color.green);
                     }
                     ObjectInfo info = new ObjectInfo(hit.distance, angleOfSensors * i + 90);
                     objectsInformation.Add(info);
