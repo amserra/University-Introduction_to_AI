@@ -8,3 +8,11 @@ O robo já consegue evitar as paredes quando apanha as primeiras 2 caixas
 
 Angulo de 180º, e strength * 0.5:
 O robo só bate na parede depois de apanhar a última caixa
+
+
+
+Teste Linear Mapa 2b:
+
+Angulo de 135º, e strength * 0.1;
+Angulo do Sensor de 10 e Range de 5;
+O robo completa o mapa todo em 39s.
