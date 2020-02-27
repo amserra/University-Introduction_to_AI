@@ -6,18 +6,21 @@ using UnityEngine;
 // Criar sensor de proximidade aos blocos
 public class BlockDetectorScript : MonoBehaviour {
 
-    public float angleOfSensors = 10f;
-    public float rangeOfSensors = 10f;
+    public float angleOfSensors;
+    public float rangeOfSensors;
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
     public float angleToClosestObstacle;
     public int numObjects;
     public bool debugMode;
+    public RobotUnit agent;
     // Start is called before the first frame update
     void Start() {
         initialTransformUp = this.transform.up;
         initialTransformFwd = this.transform.forward;
+        agent = GameObject.FindObjectsOfType<RobotUnit>()[0];
+
     }
 
     // Update is called once per frame
@@ -25,7 +28,6 @@ public class BlockDetectorScript : MonoBehaviour {
         // YOUR CODE HERE
         ObjectInfo obstacle;
         obstacle = GetClosestObstacle();
-        RobotUnit agent = GameObject.FindObjectsOfType<RobotUnit>()[0];
         if(agent.resourcesGathered < agent.maxObjects) {
             if (obstacle != null) {
                 angleToClosestObstacle = obstacle.angle + 180; // Direcao perpendicular ao obstaculo?
