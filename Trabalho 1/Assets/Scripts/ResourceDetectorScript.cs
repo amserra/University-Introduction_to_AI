@@ -40,7 +40,7 @@ public class ResourceDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength;
+        return strength * 0.5f;
     }
 
     public virtual float GetGaussianOutput() {
