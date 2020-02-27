@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleOfSensors: 5
-  rangeOfSensors: 30
+  rangeOfSensors: 50
   strength: 0
   angle: 0
   numObjects: 0
@@ -222,8 +222,11 @@ MonoBehaviour:
   rangeOfSensors: 30
   strength: 0
   angleToClosestObstacle: 0
+  angleOffset: 135
+  strengthFactor: 0.1
   numObjects: 0
   debugMode: 0
+  agent: {fileID: 0}
 --- !u!1 &3965723576953268335
 GameObject:
   m_ObjectHideFlags: 0

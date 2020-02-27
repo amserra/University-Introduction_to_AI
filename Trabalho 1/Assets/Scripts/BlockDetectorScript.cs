@@ -12,6 +12,8 @@ public class BlockDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformFwd;
     public float strength;
     public float angleToClosestObstacle;
+    public float angleOffset;
+    public float strengthFactor;
     public int numObjects;
     public bool debugMode;
     public RobotUnit agent;
@@ -30,7 +32,7 @@ public class BlockDetectorScript : MonoBehaviour {
         obstacle = GetClosestObstacle();
         if(agent.resourcesGathered < agent.maxObjects) {
             if (obstacle != null) {
-                angleToClosestObstacle = obstacle.angle + 135; // Direcao perpendicular ao obstaculo?
+                angleToClosestObstacle = obstacle.angle + angleOffset; // Direcao perpendicular ao obstaculo?
                 // Formula no enunciado
                 strength = 1.0f / (obstacle.distance + 1.0f);
             }
@@ -45,7 +47,7 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength * 0.1f; // Forca menor
+        return strength * strengthFactor; // Forca menor
     }
 
     public virtual float GetGaussianOutput() {
