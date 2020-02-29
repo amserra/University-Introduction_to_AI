@@ -27,16 +27,17 @@ public class BlockDetectorScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        // YOUR CODE HERE
         ObjectInfo obstacle;
         obstacle = GetClosestObstacle();
+        //Caso ainda nao tenha apanhado os recursos todos, continua a afastar se de obstaculos
         if(agent.resourcesGathered < agent.maxObjects) {
+        	//Caso encontre um obstaculo roda afasta se num angulo dado pela variavel angleOffSet
             if (obstacle != null) {
-                angleToClosestObstacle = obstacle.angle + angleOffset; // Direcao perpendicular ao obstaculo?
+                angleToClosestObstacle = obstacle.angle + angleOffset; 
                 // Formula no enunciado
                 strength = 1.0f / (obstacle.distance + 1.0f);
             }
-        } else {
+        } else { //Caso apanhou os recursos todos, o robo fica parado
             strength = 0;
             angleToClosestObstacle = 0;
         }
