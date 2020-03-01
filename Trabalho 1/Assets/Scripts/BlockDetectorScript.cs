@@ -48,7 +48,7 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength * strengthFactor; // Forca menor
+        return strength * strengthFactor; // Variar a forca
     }
 
     public virtual float GetGaussianOutput() {
