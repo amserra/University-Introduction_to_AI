@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465797, g: 0.4964139, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657928, g: 0.4964131, b: 0.5748174, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2385,6 +2385,11 @@ PrefabInstance:
       propertyPath: angleOfSensors
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: angleOffset
+      value: 225
+      objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: angleOfSensors
@@ -2859,10 +2864,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1588384805}
+  - {fileID: 1057290513}
   - {fileID: 166520096}
   - {fileID: 142644625}
   - {fileID: 1962773160}
-  - {fileID: 1588384805}
   - {fileID: 1677526024}
   - {fileID: 1607151652}
   - {fileID: 1517352083}
@@ -2870,7 +2876,6 @@ Transform:
   - {fileID: 1397858147}
   - {fileID: 1282730299}
   - {fileID: 1264746093}
-  - {fileID: 1057290513}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
