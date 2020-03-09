@@ -12,8 +12,6 @@ public class BlockDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformFwd;
     public float strength;
     public float angleToClosestObstacle;
-    public float angleOffset;
-    public float strengthFactor;
     public int numObjects;
     public bool debugMode;
     public RobotUnit agent;
@@ -33,7 +31,7 @@ public class BlockDetectorScript : MonoBehaviour {
         if(agent.resourcesGathered < agent.maxObjects) {
         	//Caso encontre um obstaculo roda afasta se num angulo dado pela variavel angleOffSet
             if (obstacle != null) {
-                angleToClosestObstacle = obstacle.angle + angleOffset; 
+                angleToClosestObstacle = obstacle.angle; 
                 // Formula no enunciado
                 strength = 1.0f / (obstacle.distance + 1.0f);
             }
@@ -48,17 +46,38 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        return strength * strengthFactor; // Fator que faz variar a intensidade da forca
+        return strength;
     }
 
-    public virtual float GetGaussianOutput() {
-        // YOUR CODE HERE
-        throw new NotImplementedException();
+    // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
+    public virtual float GetGaussianOutput(float mean, float variance) {
+        double s;
+        if (strength >= inferiorX && strength <= superiorX) {
+            s = 1/(variance * Math.Sqrt(2*pi)) * Math.Exp(-1/2 * (Math.Pow((strength - mean)/variance), 2));
+            if (s > inferiorY && s <= superiorY) {
+                return (float) s;// Retorna float, math.log e double
+            } else {
+                return inferiorY;
+            }
+        } else {
+            return inferiorY;
+        }
     }
 
-    public virtual float GetLogaritmicOutput() {
-        // YOUR CODE HERE
-        throw new NotImplementedException();
+    // Os valores depois do = sao os default
+    // Strength(x) e s(y, output) e entre 0 e 1
+    public virtual float GetLogaritmicOutput(float inferiorX = 0, float superiorX = 1, float inferiorY = 0 , float superiorY = 1) {
+        double s;
+        if (strength >= inferiorX && strength <= superiorX) {
+            s = -Math.log(strength); 
+            if (s > inferiorY && s <= superiorY) {
+                return (float) s;// Retorna float, math.log e double
+            } else {
+                return inferiorY;
+            }
+        } else {
+            return inferiorY;
+        }
     }
 
     public List<ObjectInfo> GetVisibleObjects(string objectTag) {
