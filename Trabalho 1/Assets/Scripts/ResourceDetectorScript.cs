@@ -13,6 +13,9 @@ public class ResourceDetectorScript : MonoBehaviour {
     public float angle;
     public int numObjects;
     public bool debug_mode;
+
+    public float mean = 0.5, variance = 0.12;
+    public float inferiorX = 0, superiorX = 1, inferiorY = 0 , superiorY = 1;
     // Start is called before the first frame update
     void Start() {
         // Transform da acesso a posicao, rotacao e escala de um objeto. Todos os objetos numa scene tem uma.
@@ -39,7 +42,7 @@ public class ResourceDetectorScript : MonoBehaviour {
         return angle;
     }
 
-    public float GetLinearOuput(float inferiorX = 0, float superiorX = 1, float inferiorY = 0 , float superiorY = 1) {
+    public float GetLinearOuput() {
         if (strength >= inferiorX && strength <= superiorX) {
             if (strength > inferiorY && strength < superiorY) {
                 return strength;// Retorna float, math.log e double
@@ -53,13 +56,15 @@ public class ResourceDetectorScript : MonoBehaviour {
         else {
             return inferiorY;
         }
+        // So se n der
+        return strength;
     }
 
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
-    public virtual float GetGaussianOutput(float mean, float variance, float inferiorX = 0, float superiorX = 1, float inferiorY = 0 , float superiorY = 1) {
+    public virtual float GetGaussianOutput() {
         double s;
         if (strength >= inferiorX && strength <= superiorX) {
-            s = 1/(variance * Math.Sqrt(2*pi)) * Math.Exp(-1/2 * (Math.Pow((strength - mean)/variance), 2));
+            s = 1/(variance * Math.Sqrt(2*Math.PI)) * Math.Exp(-1/2 * (Math.Pow((strength - mean)/variance, 2)));
             if (s > inferiorY && s < superiorY) {
                 return (float) s;// Retorna float, math.log e double
             } else if(s >= superiorY) {
@@ -72,6 +77,30 @@ public class ResourceDetectorScript : MonoBehaviour {
         else {
             return inferiorY;
         }
+        // So se n der
+        return strength;
+    }
+
+    // Os valores depois do = sao os default
+    // Strength(x) e s(y, output) e entre 0 e 1
+    public virtual float GetLogaritmicOutput() {
+        double s;
+        if (strength >= inferiorX && strength <= superiorX) {
+            s = -Math.Log(strength); 
+            if (s > inferiorY && s < superiorY) {
+                return (float) s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
+                return superiorY;
+            } else if(s <= inferiorY) {
+                return inferiorY;
+            }
+        }
+        //  else if(strength < inferiorX || strength > superiorX) {
+        else {
+            return inferiorY;
+        }
+        // So se n der
+        return strength;
     }
 
     public List<ObjectInfo> GetVisibleObjects(string objectTag) {
