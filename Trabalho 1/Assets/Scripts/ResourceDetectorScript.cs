@@ -39,18 +39,39 @@ public class ResourceDetectorScript : MonoBehaviour {
         return angle;
     }
 
-    public float GetLinearOuput() {
-        return strength;
+    public float GetLinearOuput(float inferiorX = 0, float superiorX = 1, float inferiorY = 0 , float superiorY = 1) {
+        if (strength >= inferiorX && strength <= superiorX) {
+            if (strength > inferiorY && strength < superiorY) {
+                return strength;// Retorna float, math.log e double
+            } else if(strength >= superiorY) {
+                return superiorY;
+            } else if(strength <= inferiorY) {
+                return inferiorY;
+            }
+        }
+        //  else if(strength < inferiorX || strength > superiorX) {
+        else {
+            return inferiorY;
+        }
     }
 
-    public virtual float GetGaussianOutput() {
-        // YOUR CODE HERE
-        throw new NotImplementedException();
-    }
-
-    public virtual float GetLogaritmicOutput() {
-        // YOUR CODE HERE
-        throw new NotImplementedException();
+    // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
+    public virtual float GetGaussianOutput(float mean, float variance, float inferiorX = 0, float superiorX = 1, float inferiorY = 0 , float superiorY = 1) {
+        double s;
+        if (strength >= inferiorX && strength <= superiorX) {
+            s = 1/(variance * Math.Sqrt(2*pi)) * Math.Exp(-1/2 * (Math.Pow((strength - mean)/variance), 2));
+            if (s > inferiorY && s < superiorY) {
+                return (float) s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
+                return superiorY;
+            } else if(s <= inferiorY) {
+                return inferiorY;
+            }
+        }
+        //  else if(strength < inferiorX || strength > superiorX) {
+        else {
+            return inferiorY;
+        }
     }
 
     public List<ObjectInfo> GetVisibleObjects(string objectTag) {
