@@ -11,6 +11,7 @@ public class BlockDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
+    public float s;
     public float angleToClosestObstacle;
     public int numObjects;
     public bool debugMode;
@@ -69,12 +70,12 @@ public class BlockDetectorScript : MonoBehaviour {
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
     public virtual float GetGaussianOutput() {
         if (strength >= inferiorX && strength <= superiorX) {
-            strength = 1/(variance * (float)Math.Sqrt(2*Math.PI)) * (float)Math.Exp(-1/2 * ((float)Math.Pow((strength - mean)/variance, 2)));
-            if (strength > inferiorY && strength < superiorY) {
-                return strength;// Retorna float, math.log e double
-            } else if(strength >= superiorY) {
+            s = 1/(variance * (float)Math.Sqrt(2*Math.PI)) * (float)Math.Exp(-1/2 * ((float)Math.Pow((strength - mean)/variance, 2)));
+            if (s > inferiorY && s < superiorY) {
+                return s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
                 return superiorY;
-            } else if(strength <= inferiorY) {
+            } else if(s <= inferiorY) {
                 return inferiorY;
             }
         }
@@ -90,12 +91,12 @@ public class BlockDetectorScript : MonoBehaviour {
     // Strength(x) e s(y, output) e entre 0 e 1
     public virtual float GetLogaritmicOutput() {
         if (strength >= inferiorX && strength <= superiorX && strength != 0) {
-            strength = (float) (-Math.Log(strength)); 
-            if (strength > inferiorY && strength < superiorY) {
-                return strength;// Retorna float, math.log e double
-            } else if(strength >= superiorY) {
+            s = (float) (-Math.Log(strength)); 
+            if (s > inferiorY && s < superiorY) {
+                return s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
                 return superiorY;
-            } else if(strength <= inferiorY) {
+            } else if(s <= inferiorY) {
                 return inferiorY;
             }
         }

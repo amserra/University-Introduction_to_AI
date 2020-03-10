@@ -10,6 +10,7 @@ public class ResourceDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
+    public float s;
     public float angle;
     public int numObjects;
     public bool debug_mode;
@@ -63,12 +64,12 @@ public class ResourceDetectorScript : MonoBehaviour {
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
     public virtual float GetGaussianOutput() {
         if (strength >= inferiorX && strength <= superiorX) {
-            strength = 1/(variance * (float)Math.Sqrt(2*Math.PI)) * (float)Math.Exp(-1/2 * ((float)Math.Pow((strength - mean)/variance, 2)));
-            if (strength > inferiorY && strength < superiorY) {
-                return strength;// Retorna float, math.log e double
-            } else if(strength >= superiorY) {
+            s = 1/(variance * (float)Math.Sqrt(2*Math.PI)) * (float)Math.Exp(-1/2 * ((float)Math.Pow((strength - mean)/variance, 2)));
+            if (s > inferiorY && s < superiorY) {
+                return s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
                 return superiorY;
-            } else if(strength <= inferiorY) {
+            } else if(s <= inferiorY) {
                 return inferiorY;
             }
         }
@@ -83,13 +84,15 @@ public class ResourceDetectorScript : MonoBehaviour {
     // Os valores depois do = sao os default
     // Strength(x) e s(y, output) e entre 0 e 1
     public virtual float GetLogaritmicOutput() {
+        Debug.Log("Strength: " + strength);
         if (strength >= inferiorX && strength <= superiorX && strength != 0) {
-            strength = (float) (-Math.Log(strength)); 
-            if (strength > inferiorY && strength < superiorY) {
-                return strength;// Retorna float, math.log e double
-            } else if(strength >= superiorY) {
+            s = (float)(-Math.Log(strength));
+            Debug.Log("-log(" + strength + ") = " + s);
+            if (s > inferiorY && s < superiorY) {
+                return s;// Retorna float, math.log e double
+            } else if(s >= superiorY) {
                 return superiorY;
-            } else if(strength <= inferiorY) {
+            } else if(s <= inferiorY) {
                 return inferiorY;
             }
         }
