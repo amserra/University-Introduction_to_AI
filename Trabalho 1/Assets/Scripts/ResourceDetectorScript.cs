@@ -63,8 +63,10 @@ public class ResourceDetectorScript : MonoBehaviour {
 
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
     public virtual float GetGaussianOutput() {
+        Debug.Log("Strength: " + strength);
         if (strength >= inferiorX && strength <= superiorX) {
-            s = 1/(variance * (float)Math.Sqrt(2*Math.PI)) * (float)Math.Exp(-1/2 * ((float)Math.Pow((strength - mean)/variance, 2)));
+            s = (1 / (variance * (float)Math.Sqrt(2 * Math.PI))) * (float)Math.Exp(-0.5 * Math.Pow((strength - mean) / variance, 2));
+            Debug.Log("Gaussiana(" + strength + ") = " + s);
             if (s > inferiorY && s < superiorY) {
                 return s;// Retorna float, math.log e double
             } else if(s >= superiorY) {
@@ -73,6 +75,7 @@ public class ResourceDetectorScript : MonoBehaviour {
                 return inferiorY;
             }
         }
+
         //  else if(strength < inferiorX || strength > superiorX) {
         else {
             return inferiorY;

@@ -698,7 +698,7 @@ PrefabInstance:
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: functionTypeResource
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -708,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: strengthFactorResource
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -778,17 +778,17 @@ PrefabInstance:
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: mean
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: variance
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: superiorY
-      value: 2.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -803,7 +803,7 @@ PrefabInstance:
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: superiorX
-      value: 0.3
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -814,6 +814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: strengthFactor
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: inferiorX
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8831919988329666845, guid: b606527f8af28664a894844f3f526637,
         type: 3}
