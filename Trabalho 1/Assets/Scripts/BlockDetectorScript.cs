@@ -50,62 +50,19 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     public float GetLinearOuput() {
-        if (strength >= inferiorX && strength <= superiorX) {
-            if (strength > inferiorY && strength < superiorY) {
-                return strength;// Retorna float, math.log e double
-            } else if(strength >= superiorY) {
-                return superiorY;
-            } else if(strength <= inferiorY) {
-                return inferiorY;
-            }
-        }
-        //  else if(strength < inferiorX || strength > superiorX) {
-        else {
-            return inferiorY;
-        }
-        // So se n der
         return strength;
     }
 
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
-    public virtual float GetGaussianOutput() {
-        if (strength >= inferiorX && strength <= superiorX) {
-            s = (1 / (variance * (float)Math.Sqrt(2 * Math.PI))) * (float)Math.Exp(-0.5 * Math.Pow((strength - mean) / variance, 2));
-            if (s > inferiorY && s < superiorY) {
-                return s;// Retorna float, math.log e double
-            } else if(s >= superiorY) {
-                return superiorY;
-            } else if(s <= inferiorY) {
-                return inferiorY;
-            }
-        }
-        //  else if(strength < inferiorX || strength > superiorX) {
-        else {
-            return inferiorY;
-        }
-        // So se n der
-        return strength;
+    public float GetGaussianOutput() {
+        return Mathf.Exp(-0.5f * Mathf.Pow((strength - mean) / variance, 2));
+
     }
 
     // Os valores depois do = sao os default
     // Strength(x) e s(y, output) e entre 0 e 1
-    public virtual float GetLogaritmicOutput() {
-        if (strength >= inferiorX && strength <= superiorX && strength != 0) {
-            s = (float) (-Math.Log(strength)); 
-            if (s > inferiorY && s < superiorY) {
-                return s;// Retorna float, math.log e double
-            } else if(s >= superiorY) {
-                return superiorY;
-            } else if(s <= inferiorY) {
-                return inferiorY;
-            }
-        }
-        //  else if(strength < inferiorX || strength > superiorX) {
-        else {
-            return inferiorY;
-        }
-        // So se n der
-        return strength;
+    public float GetLogaritmicOutput() {
+        return -Mathf.Log(strength);
     }
 
     public List<ObjectInfo> GetVisibleObjects(string objectTag) {
