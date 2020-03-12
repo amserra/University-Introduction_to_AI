@@ -7,6 +7,7 @@ public class LinearRobotUnitBehaviour : RobotUnit
 {
     // Estes parametros sao definidos no editor do Unity. Pode ser vista a sua variacao em runtime no editor
     public float weightResource; // Peso do nosso agente. Quanto menor mais rapido andara (mais leve sera)
+    public float weightBlock;
     public float resourceValue;
     public float resouceAngle;
     public float blockValue;
@@ -111,8 +112,10 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
         // 4 (opcional) modificar o peso
 
+        //Colocar outro valor para o bloco
+
         resourceValue *= weightResource;
-        blockValue *= weightResource;
+        blockValue *= weightBlock;
 
         // apply to the ball
         applyForce(resouceAngle, resourceValue); // go towards
