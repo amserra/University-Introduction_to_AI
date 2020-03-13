@@ -13,6 +13,7 @@ public class ResourceDetectorScript : MonoBehaviour {
     public float angle;
     public int numObjects;
     public bool debug_mode;
+    public bool seePickup;
 
     // Start is called before the first frame update
     void Start() {
@@ -29,10 +30,12 @@ public class ResourceDetectorScript : MonoBehaviour {
             angle = pickup.angle;
             // Formula no enunciado
             strength = 1.0f / (pickup.distance + 1.0f);
+            seePickup = true;
         }
         else { // no object detected: nao se mexe
             strength = 0;
             angle = 0;
+            seePickup = false;
         }
     }
 

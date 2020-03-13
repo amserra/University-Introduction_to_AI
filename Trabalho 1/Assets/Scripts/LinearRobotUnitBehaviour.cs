@@ -10,7 +10,7 @@ public class LinearRobotUnitBehaviour : RobotUnit
     public float weightResource; // Peso do nosso agente. Quanto menor mais rapido andara (mais leve sera)
     public float weightBlock;
     public float resourceValue;
-    public float resouceAngle;
+    public float resourceAngle;
     public float blockValue;
     public float blockAngle;
     public float strengthResource;
@@ -31,6 +31,10 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
 
     public enum ActivationType { Linear, Gaussiana, LogaritmicNegative };
+
+
+
+
     public ActivationType resourceActivation;
     public ActivationType blockActivation;
 
@@ -43,12 +47,21 @@ public class LinearRobotUnitBehaviour : RobotUnit
         //Ir buscar a strength
         strengthResource = resourcesDetector.strength;
 
+
         strengthBlock = blockDetector.strength;
 
         // Ir buscar o angulo
-        resouceAngle = resourcesDetector.GetAngleToClosestResource();
+        resourceAngle = resourcesDetector.GetAngleToClosestResource();
 
-        blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
+        if (resourcesDetector.seePickup){
+            blockAngle = resourceAngle;
+        } else {
+            blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
+
+        }
+
+
+
 
 
         // Caso esteja dentro do limiar ir buscar o valor do sensor
@@ -75,6 +88,9 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
 
 
+
+
+
         // Aplicar limites 
 
         //Resources
@@ -88,6 +104,7 @@ public class LinearRobotUnitBehaviour : RobotUnit
         }
 
 
+
         //Blocks
         if (blockValue > superiorYblock)
         {
@@ -97,6 +114,10 @@ public class LinearRobotUnitBehaviour : RobotUnit
         {
             blockValue = inferiorYblock;
         }
+
+
+        Debug.Log("Block Value: " + blockValue);
+
 
 
         // (opcional) modificar o peso
@@ -110,7 +131,7 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
 
         // apply to the ball
-        applyForce(resouceAngle, resourceValue); // go towards
+        applyForce(resourceAngle, resourceValue); // go towards
 
         applyForce(blockAngle, blockValue); // go towards
 
