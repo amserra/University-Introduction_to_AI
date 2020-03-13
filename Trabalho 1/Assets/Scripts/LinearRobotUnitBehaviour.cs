@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -25,6 +26,9 @@ public class LinearRobotUnitBehaviour : RobotUnit
     public float inferiorYblock = 0f;
     public float superiorYblock = 1f;
 
+    public float meanResource = 0.5f, varianceResource = 0.12f;
+    public float meanBlock = 0.5f, varianceBlock = 0.12f;
+
 
     public enum ActivationType { Linear, Gaussiana, LogaritmicNegative };
     public ActivationType resourceActivation;
@@ -35,87 +39,75 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
     void Update()
     {
-        // 1 ir buscar o valor do sensor
-        switch (resourceActivation)
-        {
-
-            case ActivationType.Linear:
-                resourceValue = resourcesDetector.GetLinearOuput();
-                break;
-            case ActivationType.Gaussiana:
-
-                resourceValue = resourcesDetector.GetGaussianOutput();
-                break;
-            case ActivationType.LogaritmicNegative:
-                resourceValue = resourcesDetector.GetLogaritmicOutput();
-                break;
-            default:
-                resourceValue = resourcesDetector.GetLinearOuput();
-                break;
-        }
-
-        switch (blockActivation)
-        {
-            case ActivationType.Linear:
-                blockValue = blockDetector.GetLinearOuput();
-                break;
-            case ActivationType.Gaussiana:
-                blockValue = blockDetector.GetGaussianOutput();
-                break;
-            case ActivationType.LogaritmicNegative:
-                blockValue = blockDetector.GetLogaritmicOutput();
-                break;
-            default:
-                blockValue = blockDetector.GetLinearOuput();
-                break;
-        }
-
-        // get sensor data
-        resouceAngle = resourcesDetector.GetAngleToClosestResource();
-
-        blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
 
         //Ir buscar a strength
         strengthResource = resourcesDetector.strength;
 
         strengthBlock = blockDetector.strength;
 
-        // 2 aplicar limiares e limites 
-        //Resources
-        if (strengthResource >= inferiorXresource && strengthResource <= superiorXresource) {
-            if(resourceValue >= superiorYresource) {
-                resourceValue = superiorYresource;
-            } else if(resourceValue <= inferiorYresource) {
-                resourceValue = inferiorYresource;
-            }
+        // Ir buscar o angulo
+        resouceAngle = resourcesDetector.GetAngleToClosestResource();
+
+        blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
+
+
+        // Caso esteja dentro do limiar ir buscar o valor do sensor
+
+        //Para o resource
+        if (strengthResource >= inferiorXresource && strengthResource <= superiorXresource)
+        {
+            resourceValue = resourceActivationFunction();
         }
-        else {
+        else
+        {
             resourceValue = inferiorYresource;
         }
 
+        //Para o block
+        if (strengthBlock >= inferiorXblock && strengthBlock <= superiorXblock)
+        {
+            blockValue = blockActivationFunction();
+        }
+        else
+        {
+            blockValue = inferiorYblock;
+        }
+
+
+
+        // Aplicar limites 
+
+        //Resources
+        if (resourceValue > superiorYresource)
+        {
+            resourceValue = superiorYresource;
+        }
+        else if (resourceValue < inferiorYresource)
+        {
+            resourceValue = inferiorYresource;
+        }
+
+
         //Blocks
-        if (strengthBlock >= inferiorXblock && strengthBlock <= superiorXblock) {
-            if (resourceBlock >= superiorYblock) {
-                resourceBlock = superiorYblock;
-            }
-            else if (resourceValue <= inferiorYblock) {
-                resourceBlock = inferiorYblock;
-            }
+        if (blockValue > superiorYblock)
+        {
+            blockValue = superiorYblock;
         }
-        else {
-            resourceBlock = inferiorYblock;
+        else if (resourceValue < inferiorYblock)
+        {
+            blockValue = inferiorYblock;
         }
 
-        // 3 aplicar limites
 
-        //Tudo no ponto 2???
-
-        // 4 (opcional) modificar o peso
+        // (opcional) modificar o peso
 
         //Colocar outro valor para o bloco
 
         resourceValue *= weightResource;
         blockValue *= weightBlock;
+
+
+
 
         // apply to the ball
         applyForce(resouceAngle, resourceValue); // go towards
@@ -125,4 +117,51 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
 
     }
+
+    private float resourceActivationFunction()
+    {
+        float value;
+        switch (resourceActivation)
+        {
+            case ActivationType.Linear:
+                value = resourcesDetector.GetLinearOuput();
+                break;
+            case ActivationType.Gaussiana:
+                value = resourcesDetector.GetGaussianOutput(meanResource, varianceResource);
+                break;
+            case ActivationType.LogaritmicNegative:
+                value = resourcesDetector.GetLogaritmicOutput();
+                break;
+            default:
+                value = resourcesDetector.GetLinearOuput();
+                break;
+        }
+
+        return value;
+    }
+
+    private float blockActivationFunction()
+    {
+        float value;
+        switch (blockActivation)
+        {
+            case ActivationType.Linear:
+                value = blockDetector.GetLinearOuput();
+                break;
+            case ActivationType.Gaussiana:
+                value = blockDetector.GetGaussianOutput(meanBlock, varianceBlock);
+                break;
+            case ActivationType.LogaritmicNegative:
+                value = blockDetector.GetLogaritmicOutput();
+                break;
+            default:
+                value = blockDetector.GetLinearOuput();
+                break;
+        }
+
+        return value;
+    }
+
 }
+
+

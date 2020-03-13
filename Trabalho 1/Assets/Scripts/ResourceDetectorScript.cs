@@ -10,13 +10,10 @@ public class ResourceDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
-    public float s;
     public float angle;
     public int numObjects;
     public bool debug_mode;
 
-    public float mean = 0.5f, variance = 0.12f;
-    public float inferiorX = 0, superiorX = 1, inferiorY = 0 , superiorY = 1;
     // Start is called before the first frame update
     void Start() {
         // Transform da acesso a posicao, rotacao e escala de um objeto. Todos os objetos numa scene tem uma.
@@ -48,7 +45,7 @@ public class ResourceDetectorScript : MonoBehaviour {
     }
 
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
-    public float GetGaussianOutput() {
+    public float GetGaussianOutput(float mean, float variance) {
         return Mathf.Exp(-0.5f * Mathf.Pow((strength - mean) / variance, 2));
 
     }

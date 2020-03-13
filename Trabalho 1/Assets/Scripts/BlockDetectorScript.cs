@@ -11,14 +11,11 @@ public class BlockDetectorScript : MonoBehaviour {
     protected Vector3 initialTransformUp;
     protected Vector3 initialTransformFwd;
     public float strength;
-    public float s;
     public float angleToClosestObstacle;
     public int numObjects;
     public bool debugMode;
     public RobotUnit agent;
 
-    public float mean = 0.5f, variance = 0.12f;
-    public float inferiorX = 0, superiorX = 1, inferiorY = 0 , superiorY = 1;
     // Start is called before the first frame update
     void Start() {
         initialTransformUp = this.transform.up;
@@ -29,6 +26,7 @@ public class BlockDetectorScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
+
         ObjectInfo obstacle;
         obstacle = GetClosestObstacle();
         //Caso ainda nao tenha apanhado os recursos todos, continua a afastar se de obstaculos
@@ -54,7 +52,7 @@ public class BlockDetectorScript : MonoBehaviour {
     }
 
     // https://en.wikipedia.org/wiki/Normal_distribution (Coluna direita, PDF)
-    public float GetGaussianOutput() {
+    public float GetGaussianOutput(float mean, float variance) {
         return Mathf.Exp(-0.5f * Mathf.Pow((strength - mean) / variance, 2));
 
     }
