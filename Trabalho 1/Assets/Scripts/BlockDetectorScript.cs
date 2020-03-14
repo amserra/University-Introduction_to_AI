@@ -60,7 +60,6 @@ public class BlockDetectorScript : MonoBehaviour {
     // Os valores depois do = sao os default
     // Strength(x) e s(y, output) e entre 0 e 1
     public float GetLogaritmicOutput() {
-        Debug.Log("-log(" + strength + ") = " + -Mathf.Log(strength));
         return -Mathf.Log(strength);
     }
 
