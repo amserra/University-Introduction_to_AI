@@ -53,12 +53,8 @@ public class LinearRobotUnitBehaviour : RobotUnit
         // Ir buscar o angulo
         resourceAngle = resourcesDetector.GetAngleToClosestResource();
 
-        if (resourcesDetector.seePickup){
-            blockAngle = resourceAngle;
-        } else {
-            blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
+        blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
 
-        }
 
 
 
