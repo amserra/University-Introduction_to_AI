@@ -124,6 +124,10 @@ public class LinearRobotUnitBehaviour : RobotUnit
         blockValue *= weightBlock;
 
 
+        if (resourcesGathered == maxObjects)
+        {
+            resourceValue = 0;
+        }
 
 
         // apply to the ball
