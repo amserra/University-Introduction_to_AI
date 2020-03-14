@@ -53,6 +53,12 @@ public class LinearRobotUnitBehaviour : RobotUnit
         // Ir buscar o angulo
         resourceAngle = resourcesDetector.GetAngleToClosestResource();
 
+        blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
+
+
+
+
+
 
         // Caso esteja dentro do limiar ir buscar o valor do sensor
 
