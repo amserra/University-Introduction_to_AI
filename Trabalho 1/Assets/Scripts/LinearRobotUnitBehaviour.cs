@@ -29,121 +29,72 @@ public class LinearRobotUnitBehaviour : RobotUnit
     public float meanResource = 0.5f, varianceResource = 0.12f;
     public float meanBlock = 0.5f, varianceBlock = 0.12f;
 
-
     public enum ActivationType { Linear, Gaussiana, LogaritmicNegative };
-
-
-
-
     public ActivationType resourceActivation;
     public ActivationType blockActivation;
 
-
-
-
-    void Update()
-    {
-
+    void Update() {
         //Ir buscar a strength
         strengthResource = resourcesDetector.strength;
-
-
         strengthBlock = blockDetector.strength;
-
+        
         // Ir buscar o angulo
         resourceAngle = resourcesDetector.GetAngleToClosestResource();
-
         blockAngle = blockDetector.GetAngleToClosestObstacle() + angleOffset;
 
-
-
-
-
-
         // Caso esteja dentro do limiar ir buscar o valor do sensor
-
         //Para o resource
-        if (strengthResource >= inferiorXresource && strengthResource <= superiorXresource)
-        {
+        if (strengthResource >= inferiorXresource && strengthResource <= superiorXresource) {
             resourceValue = resourceActivationFunction();
         }
-        else
-        {
+        else{
             resourceValue = inferiorYresource;
         }
 
         //Para o block
-        if (strengthBlock >= inferiorXblock && strengthBlock <= superiorXblock)
-        {
+        if (strengthBlock >= inferiorXblock && strengthBlock <= superiorXblock) {
             blockValue = blockActivationFunction();
         }
-        else
-        {
+        else {
             blockValue = inferiorYblock;
         }
 
-
-
-
-
-
         // Aplicar limites 
-
         //Resources
-        if (resourceValue > superiorYresource)
-        {
+        if (resourceValue > superiorYresource) {
             resourceValue = superiorYresource;
         }
-        else if (resourceValue < inferiorYresource)
-        {
+        else if (resourceValue < inferiorYresource) {
             resourceValue = inferiorYresource;
         }
 
-
-
         //Blocks
-        if (blockValue > superiorYblock)
-        {
+        if (blockValue > superiorYblock) {
             blockValue = superiorYblock;
         }
-        else if (resourceValue < inferiorYblock)
-        {
+        else if (resourceValue < inferiorYblock) {
             blockValue = inferiorYblock;
         }
 
-
         Debug.Log("Block Value: " + blockValue);
-
-
-
+        
         // (opcional) modificar o peso
-
-        //Colocar outro valor para o bloco
-
         resourceValue *= weightResource;
         blockValue *= weightBlock;
 
-
-        if (resourcesGathered == maxObjects)
-        {
+        if (resourcesGathered == maxObjects) {
             resourceValue = 0;
         }
-
 
         // apply to the ball
         applyForce(resourceAngle, resourceValue); // go towards
 
         applyForce(blockAngle, blockValue); // go towards
-
-
-
     }
 
-    private float resourceActivationFunction()
-    {
+    private float resourceActivationFunction() {
         float value;
-        switch (resourceActivation)
-        {
+        switch (resourceActivation) {
             case ActivationType.Linear:
                 value = resourcesDetector.GetLinearOuput();
                 break;
@@ -157,15 +108,12 @@ public class LinearRobotUnitBehaviour : RobotUnit
                 value = resourcesDetector.GetLinearOuput();
                 break;
         }
-
         return value;
     }
 
-    private float blockActivationFunction()
-    {
+    private float blockActivationFunction() {
         float value;
-        switch (blockActivation)
-        {
+        switch (blockActivation) {
             case ActivationType.Linear:
                 value = blockDetector.GetLinearOuput();
                 break;
@@ -179,7 +127,6 @@ public class LinearRobotUnitBehaviour : RobotUnit
                 value = blockDetector.GetLinearOuput();
                 break;
         }
-
         return value;
     }
 
