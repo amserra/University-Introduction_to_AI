@@ -2205,12 +2205,67 @@ PrefabInstance:
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: resourceActivation
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: blockActivation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: meanResource
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: varianceResource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: meanBlock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: varianceBlock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: weightBlock
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: angleOffset
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: superiorYblock
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: inferiorYblock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: inferiorYresource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: weightResource
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: superiorYresource
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4098859518129120615, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -2280,12 +2335,12 @@ PrefabInstance:
     - target: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: rangeOfSensors
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5742317949312453327, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: angleOfSensors
-      value: 36
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7314612682239532039, guid: b606527f8af28664a894844f3f526637,
         type: 3}

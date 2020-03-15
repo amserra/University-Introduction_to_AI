@@ -84,10 +84,13 @@ public class LinearRobotUnitBehaviour : RobotUnit
 
         if (resourcesGathered == maxObjects) {
             resourceValue = 0;
+            blockValue = 0;
+
         }
 
         // apply to the ball
         applyForce(resourceAngle, resourceValue); // go towards
+
 
         applyForce(blockAngle, blockValue); // go towards
     }
