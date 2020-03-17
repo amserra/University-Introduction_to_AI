@@ -1,0 +1,20 @@
+Mapa1a
+
+Quanto à função gaussiana no detetor de blocos, verificou-se que uma média alta faz com que a bola comece a ter uma força elevada exercida no sentido contrário da parede quando já está muito próxima desta, não conseguindo evitar o contacto.
+Quanto ao detetor de recursos, os tempos obtidos foram inferiores na gaussiana e no logaritmico negativo em relação à linear. Visto que neste mapa, os recursos se encontravam significativamente afastados uns dos outros, a função linear atrasa mais o movimento da bola pois a força é mais baixa quando a bola está afastada do recurso. Quanto ao logaritmo negativo, a bola quando apanhava um recurso tinha logo uma grande força aplicada na direção do próximo recurso. Quando à gaussiana, foi necessário diminuir a sua média para que a força quando a bola estava afastada do recurso foi maior.
+
+Mapa1b
+
+Neste mapa, deu para verificar vários aspetos quanto à função gaussiana no detetor de blocos. Primeiro, devido à maior complexidade do mapa, os sensores têm de ter menor ângulo entes eles e menor alcance, permitindo à bola não ter uma força exercida sobre si que afeta negativamente o seu movimento.
+Os outros aspetos relacionam-se com a função do sensor de movimentos escolhida. Por exemplo, com a linear, se a bola for a grande velocidade, a força exercida pelo sensor de blocos não é suficiente para alterar a direção da bola, embatendo contra a parede. Ocorreu também outro caso, em que a bola ao encostar-se tanto à parede, ficou lá presa,não se afastando.
+Apesar disto, a função linear apresentou melhor tempo em relação às funções gaussianas e logaritmicas negativas. Isto porque neste 2 últimas, a bola quando ia para apanhar o último recurso dava 2 voltas completas a este, pois estava muito próximo do recurso e a força exercida era muito reduzida.
+
+Mapa2b
+
+Este mapa permitiu confirmar as conclusões retiradas no mapa1b. A função gaussiana no sensor de blocos combinado com a função linear no sensor de recursos não compactuam da melhor maneira pois quando os recursos se encontram perto de uma parede, a bola após o apanhar não consegue evitar o contacto com a mesma.
+Quanto à gaussiana e ao logaritmo negativo no sensor de recursos, o melhor tempo obtido foi a do logaritmo negativo. No caso do logaritmo, a bola quando apanhava um recurso, detetava sempre outro colocando-a logo uma grande força na direção do próximo recurso. Já na gaussiana, a bola demorava mais a acelarar na fase após apanhar um recurso.
+
+Conclusão final:
+
+A função gaussiana no sensor de obstáculo mostra bons resultados com o logaritmo negativo (principalmente este) ou a gaussiana no sensor de recursos.
+Com a função linear, os resultados não foram tão bons (exceto no mapa 1b) pois a força resultante do sensor de blocos não é suficiente para contrariar a velocidade com que a bola vem quando apanha um recurso que está ao pé de uma parede
