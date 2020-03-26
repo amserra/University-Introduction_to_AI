@@ -715,6 +715,31 @@ PrefabInstance:
       propertyPath: strengthFactorBlock
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: resourceActivation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: meanResource
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: varianceResource
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: weightResource
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022615238940490695, guid: b606527f8af28664a894844f3f526637,
+        type: 3}
+      propertyPath: superiorYresource
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3453847861117205603, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: m_DynamicOccludee
