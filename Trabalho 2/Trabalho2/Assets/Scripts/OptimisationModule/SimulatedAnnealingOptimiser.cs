@@ -57,7 +57,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
 
     private float TemperatureSchedule()
     {
-        return Temperature--;
+        return Temperature - Temperature / 2;
     }
 
 
