@@ -1,0 +1,28 @@
+Referências: http://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
+
+https://www.mathworks.com/help/gads/what-is-simulated-annealing.html
+
+https://www.fys.ku.dk/~andresen/BAhome/ownpapers/permanents/annealSched.pdf
+
+https://www.researchgate.net/post/how_can_I_determine_temperature_parameters_accurately_for_simulated_annealing
+(popular answer)
+
+https://scholar.google.com/citations?user=glc0bl4AAAAJ&hl=en:
+
+https://pdf.sciencedirectassets.com/271552/1-s2.0-S0895717700X01550/1-s2.0-0895717789902021/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLWVhc3QtMSJHMEUCIQDR64Rh7%2F21f6%2FbuQRIFzTMQSivwN4r9RARBdiwafQlMQIgNp7voSoP%2BdaqdeCS%2ByTvaNFXqJKRRxAJ7APVQsNGUCQqtAMILxADGgwwNTkwMDM1NDY4NjUiDLJoUOVwwhAvBEeOBiqRA4GnZcu3LkBP6jY7FBNuaaYULnc5KeWHa6i4EMrL0MmdHWICF3I0jrq%2FY3zBtNlNFeauMHkujhuyCykH%2Bn93gYRey75KhgTt8cxwO8sZzixUbKrK9ozIICmMlvXlvW2QHDZe7PURhlzpB83dYGR3rdk3CAKWmQ2ZJIkO3CEl64G7yTmF2I2LWE4rLfChG0sobl%2F35UmFLneQ7%2FA1LnDtoVM9R8VzgGL1RphYkL6yJZvqQ2thE%2FT7tLS8G8kYNgmBTeujhC6BsCFqPpR1LzmvraT%2BtphVFtqgfHhXv6zDMAGeojj2KNYTyyHMtkGX5pza69yNRgICnLRPHL7wGAbo3ift2eE%2BumVb3gQISRWMd4FvUlETqUTrft%2BCz0FesWQNdDnL8P%2FctsAwewhN%2FqllGgEb9nSo7QUpGPhH2tyxV22z6%2FCCTY1wgtgjfTlFl%2FVSSIvvkYQlY0mxGTKsZ3zaX%2BmhCPvB1x%2FJpH3ZCqdImyDV%2BEk3e4uMwVI5fHpGkNjHPrKckGDiSv7%2Bz4MExqS2KENcMK7t%2B%2FQFOusBd79VN0m%2BuyHxvoj12GtUPmJ2D8nk25i2FwRiYiG16XGSQWR0i2rHrCMRhHpCvNYn9NqOz%2FA8Haq54btxuwdgQN3zhOVXciYbJjlzzMkJ%2BM3sr5ZdavBPvUIL5a70tgX2CU%2BaF4%2FOI67FaFYCMtVVvDfB5LpCuhfZ2WSsG1p9ojqGgr4pL5dkI9jXsQ1cdJo0Dqn3FwJtsrhFNHoHo9zo7xQ1dygeThnGHPEPg%2F87RwfoMhHqF%2Bm%2BvxgWBgA70KV3bSe%2Byj74W0B1SzpK4jOum5Ty8XM5bO3vrVVnX9SQkSi31gaSWNSm7p5clw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200421T144357Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY7D3HPQMW%2F20200421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=87a6fa926c7a8cbe28a9972260a98cc4a9e2610127a549ba4b267590bdf5ef8a&hash=8f89245582c9205160604aa1a59706bc9f573beba0bb01d1ced48aca8f39b176&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=0895717789902021&tid=spdf-16746b83-7e9f-413c-856c-c8caf4d10b2d&sid=43e1e6a21cf7914c7d9a830-7a031fa21badgxrqb&type=client
+
+https://arxiv.org/pdf/cs/0001018.pdf
+
+http://www.scielo.org.mx/pdf/cys/v21n3/1405-5546-cys-21-03-00493.pdf
+
+"
+The initial temperature should not be very high
+to have a reasonable computation time but high
+enough to allow greater freedom in exploring the
+search space. It should not be very low to
+ensure convergence towards the global minimum
+and avoid to be trapped in local minima.
+One way to choose the value of the initial temperature, is to generate a number of transformations
+and to calculate their average cost x0. The initial
+temperature value of the temperature can be set
+as"
