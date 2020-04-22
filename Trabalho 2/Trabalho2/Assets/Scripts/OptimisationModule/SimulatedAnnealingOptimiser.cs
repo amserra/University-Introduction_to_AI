@@ -74,7 +74,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
                 Temperature = T0 / (Mathf.Pow(base.CurrentNumberOfIterations, 1 / D));
                 break;
             case TemperatureSchedule.AdaptativeSimulatedAnnealing:
-                if (NewSolutionCost > CurrentSolutionCost) Temperature = alpha * Temperature;
+                if (NewSolutionCost < CurrentSolutionCost) Temperature = alpha * Temperature;
                 break;
         }
 
