@@ -29,21 +29,16 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
         int quality = Evaluate(CurrentSolution);
         CurrentSolutionCost = quality;
         T0 = Temperature;
-
     }
 
-    protected override void Step()
-    {
-
-        if(Temperature > 0)
-        {
+    protected override void Step() {
+        if(Temperature > 0) {
             newSolution = GenerateNeighbourSolution(CurrentSolution);
             NewSolutionCost = Evaluate(newSolution);
 
             probability = Mathf.Exp((CurrentSolutionCost - NewSolutionCost) / Temperature);
 
-            if(NewSolutionCost <= CurrentSolutionCost || probability > Random.Range(0,1))
-            {
+            if(NewSolutionCost <= CurrentSolutionCost || probability > Random.Range(0,1)) {
                 base.CurrentSolution = new List<int>(newSolution);
                 CurrentSolutionCost = NewSolutionCost;
                 base.bestIteration = base.CurrentNumberOfIterations;
@@ -51,8 +46,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
 
             TemperatureScheduleFunction();
         }
-        else
-        {
+        else {
             base.CurrentNumberOfIterations = base.MaxNumberOfIterations - 1;
         }
 
@@ -65,13 +59,13 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
     private void TemperatureScheduleFunction() {
         switch (temperatureSchedule) {
             case TemperatureSchedule.BoltzmanAnnealling:
-                Temperature = T0 / Mathf.Log(base.CurrentNumberOfIterations);
+                Temperature = T0 / Mathf.Log(base.CurrentNumberOfIterations + 1);
                 break;
             case TemperatureSchedule.FastAnnealling:
-                Temperature = T0 / base.CurrentNumberOfIterations;
+                Temperature = T0 / (base.CurrentNumberOfIterations + 1);
                 break;
             case TemperatureSchedule.VeryFastAnnealling:
-                Temperature = T0 / (Mathf.Pow(base.CurrentNumberOfIterations, 1 / D));
+                Temperature = T0 / (Mathf.Pow(base.CurrentNumberOfIterations + 1, 1 / D));
                 break;
             case TemperatureSchedule.AdaptativeSimulatedAnnealing:
                 if (NewSolutionCost < CurrentSolutionCost) Temperature = alpha * Temperature;
