@@ -35,7 +35,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
             newSolution = GenerateNeighbourSolution(CurrentSolution);
             NewSolutionCost = Evaluate(newSolution);
 
-            probability = Mathf.Exp((CurrentSolution Cost - NewSolutionCost) / Temperature);
+            probability = Mathf.Exp((CurrentSolutionCost - NewSolutionCost) / Temperature);
             Debug.Log("Probability:" + probability);
 
             if(NewSolutionCost <= CurrentSolutionCost || probability > Random.Range(0.0f,1.0f)) {
@@ -53,7 +53,6 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
         //DO NOT CHANGE THE LINES BELLOW
         AddInfoToFile(fileName, base.CurrentNumberOfIterations, CurrentSolutionCost, CurrentSolution, Temperature);
         base.CurrentNumberOfIterations++;
-
     }
 
     private void TemperatureScheduleFunction() {
