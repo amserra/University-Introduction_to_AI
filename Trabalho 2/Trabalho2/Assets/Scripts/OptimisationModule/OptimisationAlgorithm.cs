@@ -12,7 +12,7 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
     public int MaxNumberOfIterations = 100;
     public int CurrentNumberOfIterations = 0;
     public int iterationsPerFrame = 100;
-    public int randomSeed = 2020;
+    public int randomSeed = 2020; 
 
     protected Node startNode = null;
     protected int numberOfSteps = 0;
@@ -22,6 +22,7 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
     protected List<int> CurrentSolution = null;
     protected List<GameObject> targets;
     protected Dictionary<string, Dictionary<string, int>> distanceMatrix;
+    protected int bestIteration = 0;
 
     protected string information = "";
     
@@ -51,8 +52,10 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
                     // number of iterations have ended, saving the solution
                     bestSequenceFound = CreateSequenceFromSolution(CurrentSolution);
                     TargetSequenceDefined = true;
+                    Debug.Log("Best Iteration: " + bestIteration.ToString());
                     break;
                 }
+
             }
         }
     }
@@ -165,7 +168,8 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
         }
         temp += solution[solution.Count - 1] + 1;
         string content = iteration + "," + quality + "," + temp +"\n";
-        Debug.Log(content);
+        if(this.bestIteration == iteration)
+            Debug.Log(content);
         File.AppendAllText(fileName, content);
     }
 

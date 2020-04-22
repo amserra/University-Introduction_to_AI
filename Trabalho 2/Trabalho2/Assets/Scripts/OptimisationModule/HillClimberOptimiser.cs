@@ -35,6 +35,8 @@ public class HillClimberOptimiser : OptimisationAlgorithm
         {
             base.CurrentSolution = new List<int>(newSolution);
             bestCost = cost;
+            base.bestIteration = base.CurrentNumberOfIterations;
+
         }
 
         //DO NOT CHANGE THE LINES BELLOW
