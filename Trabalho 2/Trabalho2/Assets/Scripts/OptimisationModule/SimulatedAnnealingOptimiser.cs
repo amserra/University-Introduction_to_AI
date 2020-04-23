@@ -36,7 +36,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
             NewSolutionCost = Evaluate(newSolution);
 
             probability = Mathf.Exp((CurrentSolutionCost - NewSolutionCost) / Temperature);
-            if(probability > 1.0) probability = 1.0;
+            if(probability > 1.0f) probability = 1.0f;
             Debug.Log("Probability:" + probability);
 
             if(NewSolutionCost <= CurrentSolutionCost || probability > Random.Range(0.0f,1.0f)) {
