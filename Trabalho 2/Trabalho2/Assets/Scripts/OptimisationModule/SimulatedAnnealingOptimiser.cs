@@ -13,7 +13,7 @@ public class SimulatedAnnealingOptimiser : OptimisationAlgorithm
     private float zero = Mathf.Pow(10, -6);// numbers bellow this value can be considered zero.
     public enum TemperatureSchedule { BoltzmanAnnealling, FastAnnealling, VeryFastAnnealling, AdaptativeSimulatedAnnealing };
     public TemperatureSchedule temperatureSchedule;
-    public int D = 6;
+    public float D = 6;
     public float alpha = 1;
 
     string fileName = "Assets/Logs/" + System.DateTime.Now.ToString("ddhmmsstt") + "_SimulatedAnnealingOptimiser.csv";
