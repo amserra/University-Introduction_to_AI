@@ -23,6 +23,7 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
     protected List<GameObject> targets;
     protected Dictionary<string, Dictionary<string, int>> distanceMatrix;
     protected int bestIteration = 0;
+    protected int print = 1;
 
     protected string information = "";
     
@@ -168,8 +169,11 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
         }
         temp += solution[solution.Count - 1] + 1;
         string content = iteration + "," + quality + "," + temp +"\n";
-        if(this.bestIteration == iteration)
+        if (print == 1)
+        {
             Debug.Log(content);
+            print = 0;
+        }
         File.AppendAllText(fileName, content);
     }
 

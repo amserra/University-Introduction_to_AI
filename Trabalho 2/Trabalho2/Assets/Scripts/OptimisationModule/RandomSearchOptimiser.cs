@@ -37,6 +37,7 @@ public class RandomSearchOptimiser : OptimisationAlgorithm
             base.CurrentSolution = new List<int>(newSolution);
             bestCost = cost;
             base.bestIteration = base.CurrentNumberOfIterations;
+            print = 1;
         }
 
         //DO NOT CHANGE THE LINES BELLOW
