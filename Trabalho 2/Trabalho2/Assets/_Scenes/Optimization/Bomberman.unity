@@ -995,12 +995,12 @@ PrefabInstance:
     - target: {fileID: 199664548231404243, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: MaxNumberOfIterations
-      value: 1000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 199664548231404243, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: randomSeed
-      value: 200
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 918055334186263890, guid: b606527f8af28664a894844f3f526637,
         type: 3}
@@ -1090,12 +1090,12 @@ PrefabInstance:
     - target: {fileID: 5493275552631916647, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: MaxNumberOfIterations
-      value: 10000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 5493275552631916647, guid: b606527f8af28664a894844f3f526637,
         type: 3}
       propertyPath: randomSeed
-      value: 100
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 8831919988329666845, guid: b606527f8af28664a894844f3f526637,
         type: 3}

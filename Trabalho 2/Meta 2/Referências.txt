@@ -26,3 +26,10 @@ One way to choose the value of the initial temperature, is to generate a number 
 and to calculate their average cost x0. The initial
 temperature value of the temperature can be set
 as"
+
+Bom paper de escolher temperatura inicial:
+Nao vamos usar, dizemos no relatorio que escolhemos uma forma de tentativa e erro, porém temos conhecimento que existem técnicas avançadas, mas essas passam do escopo deste trabalho.
+
+https://www.researchgate.net/publication/227061666_Computing_the_Initial_Temperature_of_Simulated_Annealing
+
+https://cs.stackexchange.com/questions/11126/initial-temperature-in-simulated-annealing-algorithm

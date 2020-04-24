@@ -53,7 +53,7 @@ public abstract class OptimisationAlgorithm : MonoBehaviour {
                     // number of iterations have ended, saving the solution
                     bestSequenceFound = CreateSequenceFromSolution(CurrentSolution);
                     TargetSequenceDefined = true;
-                    Debug.Log("Best Iteration: " + bestIteration.ToString());
+                    Debug.Log("Iteration when found best solution: " + bestIteration.ToString());
                     break;
                 }
 
