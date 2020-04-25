@@ -31,13 +31,17 @@ public class HillClimberOptimiser : OptimisationAlgorithm
 
         this.newSolution = GenerateNeighbourSolution(CurrentSolution);
         int cost = Evaluate(newSolution);
+        if (cost < bestCost)
+        {
+            base.bestIteration = base.CurrentNumberOfIterations;
+        }
         if (cost <= bestCost)
         {
             base.CurrentSolution = new List<int>(newSolution);
             bestCost = cost;
-            base.bestIteration = base.CurrentNumberOfIterations;
-
+            base.print = 1;
         }
+
 
         //DO NOT CHANGE THE LINES BELLOW
         AddInfoToFile(fileName, base.CurrentNumberOfIterations, this.Evaluate(base.CurrentSolution), base.CurrentSolution);
