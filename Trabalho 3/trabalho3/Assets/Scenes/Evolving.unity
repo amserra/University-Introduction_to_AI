@@ -360,7 +360,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140463228}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110dd914b6d874a878dca596c8cb4731, type: 3}
   m_Name: 
@@ -370,14 +370,14 @@ MonoBehaviour:
   populationSize: 1
   NNTopology: 0c0000000300000002000000
   numberOfGenerations: 2
-  seedPopulationFromFile: 1
-  pathToFileRed: Assets/Logs/05-07-09-54-06_PL5/Best_Red_05-07-09-54-06_gen_2.dat
+  seedPopulationFromFile: 0
+  pathToFileRed: 
   pathToFileBlue: 
   generation: 0
   logFilename: 
   exportSuffix: _teste
-  mutationProbabilityRedPopulation: 0
-  mutationProbabilityBluePopulation: 0
+  mutationProbabilityRedPopulation: 0.2
+  mutationProbabilityBluePopulation: 0.2
 --- !u!114 &1140463232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140463228}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02d21771eeeb74e52884a6be78b317d1, type: 3}
   m_Name: 

@@ -73,7 +73,6 @@ public class GeneticIndividual : Individual {
     {
         /* YOUR CODE HERE! */
         /* Nota: O crossover deverá alterar ambos os indivíduos */
-        
         throw new System.NotImplementedException();
     }
 

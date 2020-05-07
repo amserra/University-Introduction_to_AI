@@ -338,7 +338,7 @@ MonoBehaviour:
   randomBluePlayerPosition: 0
   randomBallPosition: 0
   movingBall: 0
-  ChangePositions: 1
+  ChangePositions: 10
 --- !u!4 &1140463230
 Transform:
   m_ObjectHideFlags: 0
