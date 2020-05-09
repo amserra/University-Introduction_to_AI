@@ -28,7 +28,18 @@ public class TournamentSelection : SelectionMethod
 
 	public Individual tournamentSelection(List<Individual> population, int tournamentSize)
 	{
-		//* YOUR CODE HERE *//
-		throw new System.NotImplementedException();
+		Individual best = null;
+		for(int i = 0; i < tournamentSize; i++)
+		{
+			Individual ind = population[Random.Range(0, population.Count - 1)];
+			if(best == null || ind.Fitness > best.Fitness)
+			{
+				best = ind.Clone();
+			}
+
+
+		}
+
+		return best;
 	}
 }
