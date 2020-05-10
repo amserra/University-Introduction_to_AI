@@ -82,7 +82,20 @@ public class GeneticIndividual : Individual {
     {
         /* YOUR CODE HERE! */
         /* Nota: O crossover deverá alterar ambos os indivíduos */
-        throw new System.NotImplementedException();
+        int locus = Random.Range(0, partner.Size);
+
+        float[] partnerGenotype = partner.getGenotype();
+
+        for(int i = locus; i < genotype.Length; i++)
+        {
+            // Nao sei se este if e preciso
+            if (Random.Range(0.0f, 1.0f) < probability)
+            {
+                partnerGenotype[i] = this.genotype[i];
+            }
+        }
+
+        partner.setGenotype(partnerGenotype);
     }
 
 

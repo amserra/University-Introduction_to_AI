@@ -104,6 +104,14 @@ public abstract class Individual {
         return v1 * s;
     }
 
+	public float[] getGenotype() {
+		return this.genotype;
+	}
+
+	public void setGenotype(float[] genotype)
+	{
+		this.genotype = genotype;
+	}
 
     //override on each specific individual class
     public abstract void Initialize ();
