@@ -68,11 +68,12 @@ public class GeneticIndividual : Individual {
         float mean = 0.0f;
         float stdev = 0.5f;
 
-        for(int i = 0; i < totalSize; i++)
-        {
-            if(Random.Range(0.0f, 1.0f) < probability)
-            {
-                genotype[i] = genotype[i] + NextGaussian(mean, stdev);
+        // Antes
+        //for(int i = 0; i < totalSize; i++)
+        // Depois
+        for(int i = 0; i < this.genotype.Length; i++) {
+            if(Random.Range(0.0f, 1.0f) < probability) {
+                this.genotype[i] = this.genotype[i] + NextGaussian(mean, stdev);
             }
         }
         
@@ -82,19 +83,37 @@ public class GeneticIndividual : Individual {
     {
         /* YOUR CODE HERE! */
         /* Nota: O crossover deverá alterar ambos os indivíduos */
-        int locus = Random.Range(0, partner.Size);
+        // int locus = Random.Range(0, partner.Size);
+
+        // float[] partnerGenotype = partner.getGenotype();
+
+
+        // for(int i = locus; i < genotype.Length; i++)
+        // {
+        //     // Nao sei se este if e preciso
+        //     if (Random.Range(0.0f, 1.0f) < probability)
+        //     {
+        //         partnerGenotype[i] = this.genotype[i];
+        //     }
+        // }
+
+        // partner.setGenotype(partnerGenotype);
+
+        int locus = Random.Range(0, this.genotype.Length);
 
         float[] partnerGenotype = partner.getGenotype();
+        float tmpGenotype;
 
-        for(int i = locus; i < genotype.Length; i++)
-        {
-            // Nao sei se este if e preciso
-            if (Random.Range(0.0f, 1.0f) < probability)
-            {
+        for(int i = locus; i < this.genotype.Length; i++) {
+            // E preciso. Ha uma probabilidade de recombinacao
+            if (Random.Range(0.0f, 1.0f) < probability) {
+                // Troca-se o material genetico
+                tmpGenotype = partnerGenotype[i];
                 partnerGenotype[i] = this.genotype[i];
+                this.genotype[i] = tmpGenotype;
             }
         }
-
+        // Nao e preciso fazer setGenotype do this, ja esta feito
         partner.setGenotype(partnerGenotype);
     }
 
