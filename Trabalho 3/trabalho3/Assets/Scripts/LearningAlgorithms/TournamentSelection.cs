@@ -29,10 +29,10 @@ public class TournamentSelection : SelectionMethod
 	public Individual tournamentSelection(List<Individual> population, int tournamentSize)
 	{
 		Individual best = null;
-		for(int i = 0; i < tournamentSize; i++)
+		for (int i = 0; i < tournamentSize; i++)
 		{
 			Individual ind = population[Random.Range(0, population.Count - 1)];
-			if(best == null || ind.Fitness > best.Fitness)
+			if (best == null || ind.Fitness > best.Fitness)
 			{
 				best = ind.Clone();
 			}

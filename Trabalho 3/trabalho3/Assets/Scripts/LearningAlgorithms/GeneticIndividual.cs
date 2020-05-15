@@ -20,11 +20,25 @@ public class GeneticIndividual : Individual {
 
    public override void Initialize(NeuralNetwork nn)
     {
-        if (nn.networkSize != totalSize)
+        int size = nn.weights.Length * nn.weights[0].Length * nn.weights[0][0].Length;
+        if (size != totalSize)
         {
             throw new System.Exception("The Networks do not have the same size!");
         }
-        Debug.Log(nn.weights.SelectMany(listsLevel0 => listsLevel0.SelectMany(a => a).ToArray()).ToArray());
+
+        float[] weights = new float[size];
+        int weightPos = 0;
+        for (int i = 0; i < nn.weights.Length; i++)
+        {
+            for (int j = 0; j < nn.weights[i].Length; j++)
+            {
+                for (int k = 0; k < nn.weights[i][j].Length; k++)
+                {
+                    weights[weightPos++] = nn.weights[i][j][k];
+                }
+            }
+        }
+        weights.CopyTo(genotype, 0);
     }
 
     public override Individual Clone()
@@ -71,12 +85,13 @@ public class GeneticIndividual : Individual {
         // Antes
         //for(int i = 0; i < totalSize; i++)
         // Depois
-        for(int i = 0; i < this.genotype.Length; i++) {
-            if(Random.Range(0.0f, 1.0f) < probability) {
+        for (int i = 0; i < this.genotype.Length; i++)
+        {
+            if (Random.Range(0.0f, 1.0f) < probability)
+            {
                 this.genotype[i] = this.genotype[i] + NextGaussian(mean, stdev);
             }
         }
-        
     }
 
     public override void Crossover(Individual partner, float probability)
@@ -99,10 +114,13 @@ public class GeneticIndividual : Individual {
 
         // partner.setGenotype(partnerGenotype);
 
-        int locus = Random.Range(0, this.genotype.Length);
+        /* ----------- COMO ESTAVA ANTES ------------
+         * 
+         * int locus = Random.Range(0, this.genotype.Length);
 
         float[] partnerGenotype = partner.getGenotype();
         float tmpGenotype;
+
 
         for(int i = locus; i < this.genotype.Length; i++) {
             // E preciso. Ha uma probabilidade de recombinacao
@@ -112,7 +130,29 @@ public class GeneticIndividual : Individual {
                 partnerGenotype[i] = this.genotype[i];
                 this.genotype[i] = tmpGenotype;
             }
+        }*/
+
+
+
+
+        // --------- Single-point crossover --------- Nova versao
+
+        float[] partnerGenotype = partner.getGenotype();
+        float tmpGenotype;
+
+        if (Random.Range(0.0f, 1.0f) < probability)
+        {
+            int locus = Random.Range(0, this.genotype.Length);
+
+            for (int i = locus; i < this.genotype.Length; i++)
+            {
+                tmpGenotype = partnerGenotype[i];
+                partnerGenotype[i] = this.genotype[i];
+                this.genotype[i] = tmpGenotype;
+            }
+
         }
+
         // Nao e preciso fazer setGenotype do this, ja esta feito
         partner.setGenotype(partnerGenotype);
     }

@@ -55,7 +55,6 @@ public abstract class Individual {
 		evaluated = false;
         completedEvaluations = 0;
 		genotype = new float[totalSize];
-		//
 		this.mutation = mutation;
 	}
 
@@ -104,7 +103,8 @@ public abstract class Individual {
         return v1 * s;
     }
 
-	public float[] getGenotype() {
+	public float[] getGenotype()
+	{
 		return this.genotype;
 	}
 
@@ -113,8 +113,9 @@ public abstract class Individual {
 		this.genotype = genotype;
 	}
 
-    //override on each specific individual class
-    public abstract void Initialize ();
+
+	//override on each specific individual class
+	public abstract void Initialize ();
     public abstract void Initialize(NeuralNetwork nn);
     public abstract void Mutate (float probability);
 	public abstract void Crossover (Individual partner, float probability);
