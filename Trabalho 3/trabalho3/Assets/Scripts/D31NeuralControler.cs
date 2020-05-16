@@ -33,7 +33,7 @@ public class D31NeuralControler : MonoBehaviour
     public float maxSpeed = 0.0f;
     public int hitTheBall;
     public int hitTheWall;
-    
+
 
 
 
@@ -53,7 +53,14 @@ public class D31NeuralControler : MonoBehaviour
     public int GoalsOnMyGoal;
     public float[] result;
 
-
+    // Medias
+    private float avgDistanceToBall;
+    private float avgDistanceToMyGoal;
+    private float avgDistanceToAdversaryGoal;
+    private float avgDistanceToAdversary;
+    private float avgDistanceFromBallToMyGoal;
+    private float avgDistanceFromBallToAdversaryGoal;
+    private float avgDistanceToClosestWall;
 
     public NeuralNetwork neuralController;
 
@@ -66,7 +73,7 @@ public class D31NeuralControler : MonoBehaviour
 
         startPos = agent.transform.localPosition;
         previousPos = startPos;
-        
+
         if (GameFieldDebugMode && this.neuralController.weights == null)
         {
             Debug.Log("creating nn..!! ONLY IN GameFieldDebug SCENE THIS SHOULD BE USED!");
@@ -185,7 +192,7 @@ public class D31NeuralControler : MonoBehaviour
         previousPos = agent.transform.localPosition;
         hitTheBall = agent.hitTheBall;
         hitTheWall = agent.hitTheWall;
-        
+
         currentSpeed = currentDistance / Time.deltaTime;
         maxSpeed = (currentSpeed > maxSpeed ? currentSpeed : maxSpeed);
 
@@ -234,11 +241,32 @@ public class D31NeuralControler : MonoBehaviour
         return simulationTime > this.maxSimulTime;
     }
 
+    private void update_averages()
+    {
+        this.avgDistanceToBall = distanceToBall.Count > 0 ? distanceToBall.Average() : 0.0f;
+        this.avgDistanceToMyGoal = distanceToMyGoal.Count > 0 ? distanceToMyGoal.Average() : 0.0f;
+        this.avgDistanceToAdversaryGoal = distanceToAdversaryGoal.Count > 0 ? distanceToAdversaryGoal.Average() : 0.0f;
+        this.avgDistanceToAdversary = distanceToAdversary.Count > 0 ? distanceToAdversary.Average() : 0.0f;
+        this.avgDistanceFromBallToMyGoal = distancefromBallToMyGoal.Count > 0 ? distancefromBallToMyGoal.Average() : 0.0f;
+        this.avgDistanceToAdversaryGoal = distanceToAdversaryGoal.Count > 0 ? distanceToAdversaryGoal.Average() : 0.0f;
+        this.avgDistanceToClosestWall = distanceToClosestWall.Count > 0 ? distanceToClosestWall.Average() : 0.0f;
+    }
+
+    private float fitness_basic()
+    {
+        float positive = hitTheBall * 0.4f + GoalsOnAdversaryGoal * 0.5f;
+        float negative = hitTheWall * 0.5f + GoalsOnMyGoal * 0.5f;
+        return positive - negative;
+    }
+
     public float GetScoreBlue()
     {
         // Fitness function for the Blue player. The code to attribute fitness to individuals should be written here.  
         //* YOUR CODE HERE*//
-        float fitness = distanceTravelled;
+        // O que estava
+        // float fitness = distanceTravelled;
+        update_averages();
+        float fitness = fitness_basic();
         return fitness;
     }
 
@@ -246,7 +274,10 @@ public class D31NeuralControler : MonoBehaviour
     {
         // Fitness function for the Red player. The code to attribute fitness to individuals should be written here. 
         //* YOUR CODE HERE*//
-        float fitness = distanceTravelled;
+        // O que estava
+        // float fitness = distanceTravelled;
+        update_averages();
+        float fitness = fitness_basic();
         return fitness;
     }
 
