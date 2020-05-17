@@ -237,7 +237,7 @@ public class D31NeuralControler : MonoBehaviour
     {
         // You can modify this to change the length of the simulation of an individual before evaluating it.
         // (a variavel maxSimulTime está por defeito a 30 segundos)
-        this.maxSimulTime = 10; // Descomentem e alterem aqui valor do maxSimultime se necessário.
+        this.maxSimulTime = 15; // Descomentem e alterem aqui valor do maxSimultime se necessário.
         return simulationTime > this.maxSimulTime;
     }
 
@@ -252,7 +252,6 @@ public class D31NeuralControler : MonoBehaviour
         this.avgDistanceToClosestWall = distanceToClosestWall.Count > 0 ? distanceToClosestWall.Average() : 0.0f;
     }
 
-    // Esta funciona bem para o caso basico. Nao funciona tao bem se tivermos posicao aleatoria
     private float fitness_basic()
     {
         float positive = hitTheBall * 0.0002f + GoalsOnAdversaryGoal * 1.0f + this.avgDistanceToMyGoal * 0.2f;
