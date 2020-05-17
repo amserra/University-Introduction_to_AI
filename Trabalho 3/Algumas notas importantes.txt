@@ -1,0 +1,48 @@
+[sujeito a alterações. É uma análise preliminar]
+
+Sobre os parâmetros de aptidão:
+
+Estes podem ter valores de 0 a 1, que são o caso do distanceToBall, distanceToMyGoal, distanceToAdversaryGoal, distancefromBallToMyGoal, distancefromBallToAdversaryGoal e distanceToClosestWall. Basicamente todos os que são em lista.
+Nestes eu fiz a média dos valores da lista.
+
+Os outros - distanceTravelled, hitTheBall, hitTheWall, GoalsOnMyGoal, GoalsOnAdversaryGoal - podem ir de 0 a infinito.
+
+As operações que podemos fazer sob os parâmetros de aptidão são: adição e subtração (operações básicas), multiplicação e divisão (mais avançadas). O uso das primeiras é claro. Das segundas pode-se ver desta forma:
+
+(p = parâmetro de aptidão)
+
+Divisão: p1/p2 -> o peso desta operação é diretamente proporcional a p1 e inversamente proporcional a p2. 
+
+Multiplicação: p1*p2 -> se p1 for um parâmetro do tipo lista (valor 0 a 1), vai reduzir p2 (seja do tipo lista ou dos outros). Caso p1 e p2 não sejam do tipo lista, eles vão aumentar rapidamente.
+
+
+
+Acho que os parâmetros que devem aumentar a aptidão quando o seu valor aumenta são:
+
+distanceToMyGoal - queremos que o nosso agente esteja longe da sua baliza. Isto, se bem conjugado com os outros parâmetros, irá priviligiar agentes que estejam esteja mais perto da baliza adversária. Mas para isso têm de tocar na bola.
+
+distanceFromBallToMyGoal - queremos que a bola esteja o mais longe da nossa baliza possível. Assim não sofremos golo.
+
+hitTheBall - queremos agentes que interajam com a bola e não aqueles que vão para um sítio qualquer. Este é dos mais importantes
+
+goalsOnAdversaryGoal - agentes que marquem golos devem ser (altamente) beneficiados
+
+Os parâmetros que devem diminuir a aptidão quando o seu valor aumenta  são:
+
+distanceToBall - quanto maior à distância à bola (média), pior é esta simulação. Queremos simulações que toquem e que interajam com a bola
+
+distanceToAdversaryGoal - queremos que esteja perto da baliza adversária para poder marcar mais golos. Isto tem de ser bem conjugado com os outros parâmetros para ter esta lógica
+
+distancefromBallToAdversaryGoal - queremos a bola o mais perto da baliza adversária, para marcar mais golos.
+
+distanceToClosestWall - não queremos que ande muito perto das paredes, porque pode cair naqueles casos que fica "preso" na parede. Mas tmb não pode ter muita influência, porque se não a única trajetória que ele sabe é aquela "a direito"
+
+hitTheWall - não queremos agentes que batam muito nas paredes, porque isso normalmente não é bom sinal
+
+goalsOnMyGoal - agentes que sofram golos devem ser penalizados
+
+Os parâmetros que não sei o que fazer com eles (ainda):
+
+distanceToAdversary - poderá ser útil se quisermos que o nosso agente aprenda, por exemplo, a bater no adversário para ganhar vantagem.
+
+distanceTravelled - o aumento deste parâmetro pode ser bom mas também pode ser mau
