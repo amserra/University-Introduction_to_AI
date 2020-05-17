@@ -237,7 +237,7 @@ public class D31NeuralControler : MonoBehaviour
     {
         // You can modify this to change the length of the simulation of an individual before evaluating it.
         // (a variavel maxSimulTime está por defeito a 30 segundos)
-        //this.maxSimulTime = 30; // Descomentem e alterem aqui valor do maxSimultime se necessário.
+        this.maxSimulTime = 10; // Descomentem e alterem aqui valor do maxSimultime se necessário.
         return simulationTime > this.maxSimulTime;
     }
 
@@ -248,14 +248,15 @@ public class D31NeuralControler : MonoBehaviour
         this.avgDistanceToAdversaryGoal = distanceToAdversaryGoal.Count > 0 ? distanceToAdversaryGoal.Average() : 0.0f;
         this.avgDistanceToAdversary = distanceToAdversary.Count > 0 ? distanceToAdversary.Average() : 0.0f;
         this.avgDistanceFromBallToMyGoal = distancefromBallToMyGoal.Count > 0 ? distancefromBallToMyGoal.Average() : 0.0f;
-        this.avgDistanceToAdversaryGoal = distanceToAdversaryGoal.Count > 0 ? distanceToAdversaryGoal.Average() : 0.0f;
+        this.avgDistanceFromBallToAdversaryGoal = distanceToAdversaryGoal.Count > 0 ? distanceToAdversaryGoal.Average() : 0.0f;
         this.avgDistanceToClosestWall = distanceToClosestWall.Count > 0 ? distanceToClosestWall.Average() : 0.0f;
     }
 
+    // Esta funciona bem para o caso basico. Nao funciona tao bem se tivermos posicao aleatoria
     private float fitness_basic()
     {
-        float positive = hitTheBall * 0.4f + GoalsOnAdversaryGoal * 0.5f;
-        float negative = hitTheWall * 0.5f + GoalsOnMyGoal * 0.5f;
+        float positive = hitTheBall * 0.0002f + GoalsOnAdversaryGoal * 1.0f + this.avgDistanceToMyGoal * 0.2f;
+        float negative = hitTheWall * 0.0002f + GoalsOnMyGoal * 0.5f + this.avgDistanceFromBallToAdversaryGoal * 0.4f + this.avgDistanceToClosestWall * 0.4f;
         return positive - negative;
     }
 
@@ -263,8 +264,6 @@ public class D31NeuralControler : MonoBehaviour
     {
         // Fitness function for the Blue player. The code to attribute fitness to individuals should be written here.  
         //* YOUR CODE HERE*//
-        // O que estava
-        // float fitness = distanceTravelled;
         update_averages();
         float fitness = fitness_basic();
         return fitness;
@@ -274,8 +273,6 @@ public class D31NeuralControler : MonoBehaviour
     {
         // Fitness function for the Red player. The code to attribute fitness to individuals should be written here. 
         //* YOUR CODE HERE*//
-        // O que estava
-        // float fitness = distanceTravelled;
         update_averages();
         float fitness = fitness_basic();
         return fitness;
