@@ -30,6 +30,7 @@ public class D31NeuralControler : MonoBehaviour
     public List<float> distanceToClosestWall;
     public float distanceTravelled = 0.0f;
     public float avgSpeed = 0.0f;
+
     public float maxSpeed = 0.0f;
     public int hitTheBall;
     public int hitTheWall;
@@ -237,7 +238,7 @@ public class D31NeuralControler : MonoBehaviour
     {
         // You can modify this to change the length of the simulation of an individual before evaluating it.
         // (a variavel maxSimulTime está por defeito a 30 segundos)
-        this.maxSimulTime = 15; // Descomentem e alterem aqui valor do maxSimultime se necessário.
+        this.maxSimulTime = 20; // Descomentem e alterem aqui valor do maxSimultime se necessário.
         return simulationTime > this.maxSimulTime;
     }
 
@@ -254,9 +255,11 @@ public class D31NeuralControler : MonoBehaviour
 
     private float fitness_basic()
     {
-        float positive = hitTheBall * 0.0002f + GoalsOnAdversaryGoal * 1.0f + this.avgDistanceToMyGoal * 0.2f;
-        float negative = hitTheWall * 0.0002f + GoalsOnMyGoal * 0.5f + this.avgDistanceFromBallToAdversaryGoal * 0.4f + this.avgDistanceToClosestWall * 0.4f;
-        return positive - negative;
+        float fitness;
+        float positive = GoalsOnAdversaryGoal*1000 + avgDistanceFromBallToAdversaryGoal*200 + hitTheBall*400 + avgDistanceToBall*100 + avgDistanceToAdversary*50;
+        float negative = GoalsOnMyGoal*1000 + avgDistanceFromBallToMyGoal*200 + hitTheWall*100 + avgDistanceToClosestWall*50;
+        fitness = positive - negative;
+        return fitness;
     }
 
     public float GetScoreBlue()
