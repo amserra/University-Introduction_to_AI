@@ -39,6 +39,7 @@ public class D31NeuralControler : MonoBehaviour
 
 
     public float maxSimulTime = 1;
+    public float simTime = 30;
     public bool GameFieldDebugMode = false;
     public bool gameOver = false;
     public bool running = false;
@@ -62,6 +63,9 @@ public class D31NeuralControler : MonoBehaviour
     private float avgDistanceFromBallToMyGoal;
     private float avgDistanceFromBallToAdversaryGoal;
     private float avgDistanceToClosestWall;
+
+    // Fitness
+    public String fitnessFunction;
 
     public NeuralNetwork neuralController;
 
@@ -89,7 +93,6 @@ public class D31NeuralControler : MonoBehaviour
         distancefromBallToAdversaryGoal = new List<float>();
         distancefromBallToMyGoal = new List<float>();
         distanceToClosestWall = new List<float>();
-
     }
 
 
@@ -238,7 +241,8 @@ public class D31NeuralControler : MonoBehaviour
     {
         // You can modify this to change the length of the simulation of an individual before evaluating it.
         // (a variavel maxSimulTime está por defeito a 30 segundos)
-        this.maxSimulTime = 25; // Descomentem e alterem aqui valor do maxSimultime se necessário.
+        this.maxSimulTime = simTime; // Descomentem e alterem aqui valor do maxSimultime se necessário.
+        //Debug.Log("time = " + maxSimulTime);
         return simulationTime > this.maxSimulTime;
     }
 
@@ -276,12 +280,27 @@ public class D31NeuralControler : MonoBehaviour
         return fitness;
     }
 
+    private float getFitness(String fitnessFunction)
+    {
+        if (fitnessFunction == "Fitness") return fitnesss();
+
+        else if (fitnessFunction == "FitnessBasic") return fitness_basic();
+
+        else if (fitnessFunction == "FitnessVeryBasic") return fitness_very_basic();
+
+        else
+        {
+            Debug.Log("ERROR FITNESS!! A CULPA E DO BENFICA");
+            return fitnesss();
+        }
+    }
+
     public float GetScoreBlue()
     {
         // Fitness function for the Blue player. The code to attribute fitness to individuals should be written here.  
-        //* YOUR CODE HERE*//
+        //* YOUR CODE HERE*//        
         update_averages();
-        float fitness = fitness_very_basic();
+        float fitness = getFitness(fitnessFunction);
         return fitness;
     }
 
@@ -290,7 +309,7 @@ public class D31NeuralControler : MonoBehaviour
         // Fitness function for the Red player. The code to attribute fitness to individuals should be written here. 
         //* YOUR CODE HERE*//
         update_averages();
-        float fitness = fitness_very_basic();
+        float fitness = getFitness(fitnessFunction);
         return fitness;
     }
 

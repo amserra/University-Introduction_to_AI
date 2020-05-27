@@ -7,6 +7,9 @@ public class GeneticAlgorithm : MetaHeuristic
 
     public int tournamentSize;
 
+    public enum CrossoverFunction { OnePointCrossover, UniformCrossover };
+    public CrossoverFunction crossoverFunction;
+
     [Header("Red Population Parameters")]
     public float mutationProbabilityRedPopulation;
     public float crossoverProbabilityRedPopulation;
@@ -87,8 +90,18 @@ public class GeneticAlgorithm : MetaHeuristic
             Individual parent1Blue = newPopBlue[i];
             Individual parent2Blue = newPopBlue[i + 1];
 
-            parent1Red.Crossover(parent2Red, crossoverProbabilityRedPopulation);
-            parent1Blue.Crossover(parent2Blue, crossoverProbabilityBluePopulation);
+            switch (crossoverFunction)
+            {
+                case CrossoverFunction.OnePointCrossover:
+                    parent1Red.Crossover(parent2Red, crossoverProbabilityRedPopulation);
+                    parent1Blue.Crossover(parent2Blue, crossoverProbabilityBluePopulation);
+                    break;
+                case CrossoverFunction.UniformCrossover:
+                    parent1Red.Uniform_Crossover(parent2Red, crossoverProbabilityRedPopulation);
+                    parent1Blue.Uniform_Crossover(parent2Blue, crossoverProbabilityBluePopulation);
+                    break;
+            }
+
         }
 
         //Mutation 

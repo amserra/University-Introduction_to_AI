@@ -14,6 +14,23 @@ public class SimulationInfo
     public int individualIndexBlue;
 
 
+    public SimulationInfo(GameObject sim, D31NeuralControler playerRed, D31NeuralControler playerBlue, int individualIndexRed, int individualIndexBlue, float simTime, string fitnessFunction)
+    {
+        this.sim = sim;
+        this.playerRed = playerRed;
+        this.playerBlue = playerBlue;
+        this.individualIndexRed = individualIndexRed;
+        this.individualIndexBlue = individualIndexBlue;
+        this.playerRed.simTime = simTime;
+        this.playerRed.fitnessFunction = fitnessFunction;
+
+        if (playerBlue != null)
+        {
+            this.playerBlue.simTime = simTime;
+            this.playerBlue.fitnessFunction = fitnessFunction;
+        }
+
+    }
     public SimulationInfo(GameObject sim, D31NeuralControler playerRed, D31NeuralControler playerBlue, int individualIndexRed, int individualIndexBlue)
     {
         this.sim = sim;
@@ -62,6 +79,9 @@ public class EvolvingControl : MonoBehaviour {
     protected List<int> indexesBlue;
     protected bool singlePlayer;
     protected string textoUpdate;
+    public float simTime = 30;
+    public enum FitnessFunction { Fitness, FitnessBasic, FitnessVeryBasic };
+    public FitnessFunction fitnessFunction;
 
     public void Shuffle(List<int> ts)
     {
@@ -190,7 +210,7 @@ public class EvolvingControl : MonoBehaviour {
             bluePlayerScript.neuralController = metaengine.PopulationBlue[indexIndBlue].getIndividualController();
         }
 
-        return new SimulationInfo (sim, redPlayerScript, bluePlayerScript , indexIndRed, indexIndBlue);
+        return new SimulationInfo (sim, redPlayerScript, bluePlayerScript , indexIndRed, indexIndBlue, simTime, fitnessFunction.ToString());
 	}
 
 
