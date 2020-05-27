@@ -2,36 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Individual {
+public abstract class Individual
+{
 
-	protected float[] genotype;
-	protected MetaHeuristic.MutationType mutation;
-	protected int[] topology;
+    protected float[] genotype;
+    protected MetaHeuristic.MutationType mutation;
+    protected int[] topology;
 
-	protected int totalSize = 1;
-	protected float fitness;
+    protected int totalSize = 1;
+    protected float fitness;
     protected List<float> evaluations;
     protected bool evaluated;
-	protected NeuralNetwork network;
+    protected NeuralNetwork network;
     protected int completedEvaluations = 0;
     protected int maxNumberOfEvaluations = 0;
 
-	public int Size
-	{
-		get { return totalSize;}
-	}
+    public int Size
+    {
+        get { return totalSize; }
+    }
 
-	public float Fitness
-	{
-	    get { return fitness;}
-	
-	}
+    public float Fitness
+    {
+        get { return fitness; }
+
+    }
 
     public void SetEvaluations(float quality)
     {
         evaluations.Insert(completedEvaluations, quality);
         completedEvaluations++;
-        if(completedEvaluations == maxNumberOfEvaluations)
+        if (completedEvaluations == maxNumberOfEvaluations)
         {
             completedEvaluations = 0;
             fitness = evaluations.Average();
@@ -40,47 +41,53 @@ public abstract class Individual {
     }
 
     public bool Evaluated
-	{
-		get { return evaluated;}
-	}
+    {
+        get { return evaluated; }
+    }
 
 
-	public Individual(int[] topology, int numberOfEvaluations, MetaHeuristic.MutationType mutation) {
-		foreach(int size in topology)
-			totalSize *= size;
-		this.topology = topology;
+    public Individual(int[] topology, int numberOfEvaluations, MetaHeuristic.MutationType mutation)
+    {
+        foreach (int size in topology)
+            totalSize *= size;
+        this.topology = topology;
         fitness = 0.0f;
         maxNumberOfEvaluations = numberOfEvaluations;
         evaluations = new List<float>(numberOfEvaluations);
-		evaluated = false;
+        evaluated = false;
         completedEvaluations = 0;
-		genotype = new float[totalSize];
-		this.mutation = mutation;
-	}
+        genotype = new float[totalSize];
+        this.mutation = mutation;
+    }
 
 
-	public NeuralNetwork getIndividualController() {
-		network = new NeuralNetwork (topology);
-		network.map_from_linear (genotype);
-		return network;
-	}
+    public NeuralNetwork getIndividualController()
+    {
+        network = new NeuralNetwork(topology);
+        network.map_from_linear(genotype);
+        return network;
+    }
 
-	public override string ToString () {
-		if (network == null) {
-			getIndividualController ();
-		}
-		string res = "[GeneticIndividual]: [";
-		for (int i = 0; i < totalSize; i++) {
-			res += genotype [i].ToString ();
-			if (i != totalSize - 1) {
-				res += ",";
-			}
-		}
-		res += "]\n";
-		res += "Neural Network\n" + network.ToString() + "\n";
-		return res;
+    public override string ToString()
+    {
+        if (network == null)
+        {
+            getIndividualController();
+        }
+        string res = "[GeneticIndividual]: [";
+        for (int i = 0; i < totalSize; i++)
+        {
+            res += genotype[i].ToString();
+            if (i != totalSize - 1)
+            {
+                res += ",";
+            }
+        }
+        res += "]\n";
+        res += "Neural Network\n" + network.ToString() + "\n";
+        return res;
 
-	}
+    }
 
     public static float NextGaussian(float mean, float standard_deviation)
     {
@@ -103,21 +110,23 @@ public abstract class Individual {
         return v1 * s;
     }
 
-	public float[] getGenotype()
-	{
-		return this.genotype;
-	}
+    public float[] getGenotype()
+    {
+        return this.genotype;
+    }
 
-	public void setGenotype(float[] genotype)
-	{
-		this.genotype = genotype;
-	}
+    public void setGenotype(float[] genotype)
+    {
+        this.genotype = genotype;
+    }
 
 
-	//override on each specific individual class
-	public abstract void Initialize ();
+    //override on each specific individual class
+    public abstract void Initialize();
     public abstract void Initialize(NeuralNetwork nn);
-    public abstract void Mutate (float probability);
-	public abstract void Crossover (Individual partner, float probability);
-	public abstract Individual Clone ();
+    public abstract void Mutate(float probability);
+    public abstract void Crossover(Individual partner, float probability);
+    public abstract void Uniform_Crossover(Individual partner, float probability);
+
+    public abstract Individual Clone();
 }

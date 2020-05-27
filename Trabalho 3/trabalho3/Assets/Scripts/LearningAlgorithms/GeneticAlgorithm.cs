@@ -70,7 +70,7 @@ public class GeneticAlgorithm : MetaHeuristic
         generation++;
         if (generation == numberOfGenerations) // no need to execute the step if we reached max generation
             return;
-        
+
         List<Individual> newPopRed;
         List<Individual> newPopBlue;
 
