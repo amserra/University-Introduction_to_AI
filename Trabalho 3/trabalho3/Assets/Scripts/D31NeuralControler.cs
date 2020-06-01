@@ -257,6 +257,40 @@ public class D31NeuralControler : MonoBehaviour
         this.avgDistanceToClosestWall = distanceToClosestWall.Count > 0 ? distanceToClosestWall.Average() : 0.0f;
     }
 
+    private float fitness_attacker()
+    {
+        /* 
+            Este e o atacante. Porem nao e um atacante brando como um Sporar. Este e mais
+            um Zlatan. Gosta (muito) de marcar golos mas tambem gosta (muito) de contacto
+            fisico e de uma boa disputa.
+            Ele fica um pouco chateado por sofrer golos, mas, na verdade, esta-se nas tintas.
+            Ele quer é marcar golos
+        */
+
+        // float positive = GoalsOnAdversaryGoal * 300 + hitTheBall * 200 + distanceTravelled * 10;
+        // float negative = avgDistanceToBall * 150 + avgDistanceFromBallToAdversaryGoal * 50 + avgDistanceToAdversary * 50 + GoalsOnMyGoal * 50 + hitTheWall * 10;
+        // Debug.Log(hitTheBall); // Valores tipo 600, 500, ou 1, 0
+        float positive = GoalsOnAdversaryGoal * 10000 + Math.Min(hitTheBall, 100) + Math.Min(distanceTravelled, 50) + avgDistanceFromBallToMyGoal * 200 + avgDistanceToClosestWall * 300;
+        // Debug.Log(avgDistanceToBall); // Valores tipo 0.2, 0.37, 0.98. No minimo 0, no maximo 1
+        float negative = avgDistanceToBall * 500 + avgDistanceFromBallToAdversaryGoal * 350 + GoalsOnMyGoal * 1000 + Math.Min(hitTheWall, 100) + avgDistanceToAdversary * 50;
+        return positive - negative;
+    }
+
+    private float fitness_middlefieldler()
+    {
+        float fitness;
+        float positive = GoalsOnAdversaryGoal * 1000 + Math.Min(hitTheBall, 150) + avgDistanceFromBallToMyGoal * 100;
+        float negative = GoalsOnMyGoal * 500 + avgDistanceToBall * 300 + hitTheWall + avgDistanceFromBallToAdversaryGoal * 100 + avgDistanceToAdversary * 100;
+        fitness = positive - negative;
+        return fitness;
+    }
+
+    private float fitness_defender() {
+        float positive = GoalsOnAdversaryGoal * 10000 + avgDistanceFromBallToMyGoal * 1000 + hitTheBall + avgDistanceToAdversaryGoal * 400 + avgDistanceToClosestWall * 500;
+        float negative = GoalsOnMyGoal * 10000 + hitTheWall * 1000 + avgDistanceToMyGoal * 1000 + avgDistanceToBall * 500 + avgDistanceFromBallToAdversaryGoal * 1000;
+        return positive - negative;
+    }
+
     private float fitnesss()
     {
         float fitness;
@@ -288,6 +322,10 @@ public class D31NeuralControler : MonoBehaviour
 
         else if (fitnessFunction == "FitnessVeryBasic") return fitness_very_basic();
 
+        else if (fitnessFunction == "FitnessAttacker") return fitness_attacker();
+
+        else if (fitnessFunction == "FitnessMiddlefieldler") return fitness_middlefieldler();
+
         else
         {
             Debug.Log("ERROR FITNESS!! A CULPA E DO BENFICA");
@@ -300,6 +338,7 @@ public class D31NeuralControler : MonoBehaviour
         // Fitness function for the Blue player. The code to attribute fitness to individuals should be written here.  
         //* YOUR CODE HERE*//        
         update_averages();
+        Debug.Log("blue: " + fitnessFunction);
         float fitness = getFitness(fitnessFunction);
         return fitness;
     }
@@ -309,6 +348,7 @@ public class D31NeuralControler : MonoBehaviour
         // Fitness function for the Red player. The code to attribute fitness to individuals should be written here. 
         //* YOUR CODE HERE*//
         update_averages();
+        Debug.Log("red: " + fitnessFunction);
         float fitness = getFitness(fitnessFunction);
         return fitness;
     }
